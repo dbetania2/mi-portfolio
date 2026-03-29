@@ -43,7 +43,7 @@ section {
   width: 100%;
 }
 
-/* 🔥 FIX: Contenedor interno reutilizable para que no crezca al infinito */
+/* Contenedor interno reutilizable para que no crezca al infinito */
 .container {
   max-width: 56.25rem; /* Aprox 900px */
   margin: 0 auto;
@@ -219,7 +219,7 @@ p  { font-size: 1.25rem; }
   }
 
   .hero-sprite-container {
-    flex: 1;
+    flex: 3;
     max-width: 500px; 
     height: auto;
     aspect-ratio: 1 / 1;

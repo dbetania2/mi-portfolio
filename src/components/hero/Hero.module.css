@@ -1,0 +1,93 @@
+.section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 5rem;
+  overflow: hidden;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 56.25rem;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.text {
+  width: 100%;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.spriteContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  flex-shrink: 0;
+  background-image: url('/sprites/fondochibi.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  image-rendering: pixelated;
+}
+
+.chibiScaled {
+  position: relative;
+  z-index: 1;
+  transform: scale(2);
+  image-rendering: pixelated;
+}
+
+@media (min-width: 768px) {
+  .spriteContainer {
+    width: 300px;
+    height: 300px;
+  }
+
+  .chibiScaled {
+    transform: scale(4);
+  }
+}
+
+@media (min-width: 1024px) {
+  .layout {
+    flex-direction: row;
+    justify-content: center;
+    text-align: left;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  .text {
+    flex: 1;
+  }
+
+  .buttons {
+    justify-content: flex-start;
+  }
+
+  .spriteContainer {
+    flex: 3;
+    max-width: 500px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .chibiScaled {
+    transform: scale(7);
+  }
+}
