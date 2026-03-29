@@ -45,7 +45,7 @@ export default function About() {
             />
             <Image
               src="/images/yo3.jpeg"
-              alt="Daiana frente a la computadora"
+              alt="Daiana sentada feliz"
               fill
               className={styles.imgReal}
             />

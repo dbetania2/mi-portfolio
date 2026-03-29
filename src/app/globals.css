@@ -239,3 +239,10 @@ p  { font-size: 1.25rem; }
     display: none;
   }
 }
+* {
+  cursor: url('/cursor/cursor.png') 0 0, auto;
+}
+
+a, button, .pixel-btn {
+  cursor: url('/cursor/cursor-hand.png') 0 0, pointer;
+}
