@@ -1,56 +1,76 @@
-const projects = [
-  {
-    title: 'Proyecto 1',
-    description: 'Descripción breve del proyecto y las tecnologías usadas.',
-    tech: ['Next.js', 'Supabase'],
-    github: '#',
-    live: '#',
-  },
-  {
-    title: 'Proyecto 2',
-    description: 'Descripción breve del proyecto y las tecnologías usadas.',
-    tech: ['React', 'Node.js'],
-    github: '#',
-    live: '#',
-  },
-  {
-    title: 'Proyecto 3',
-    description: 'Descripción breve del proyecto y las tecnologías usadas.',
-    tech: ['TypeScript', 'PostgreSQL'],
-    github: '#',
-    live: '#',
-  },
-]
+import { supabase } from '@/lib/supabase'
+import styles from './Projects.module.css'
+import Image from 'next/image'
+import { techIcons } from '@/lib/techIcons'
 
-export default function Projects() {
+type Project = {
+  id: number
+  title: string
+  short_description: string
+  tech_stack: string[]
+  github_url: string | null
+  live_url: string | null
+  image_url: string | null
+}
+
+export default async function Projects() {
+  const { data: projects } = await supabase
+    .from('projects')
+    .select('id, title, short_description, tech_stack, github_url, live_url, image_url')
+    .order('created_at', { ascending: false })
+
   return (
-    <section id="proyectos">
-      <h2>[ Proyectos ]</h2>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(16rem, 1fr))',
-        gap: '1.5rem',
-      }}>
-        {projects.map((p) => (
-          <div key={p.title} className="pixel-border" style={{
-            padding: '1.5rem',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem',
-          }}>
-            <h3 style={{ color: 'var(--accent)' }}>{p.title}</h3>
-            <p style={{ lineHeight: '2' }}>{p.description}</p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
-              {p.tech.map((t) => (
-                <span key={t} className="pixel-badge">{t}</span>
-              ))}
+    <section id="proyectos" className={styles.section}>
+      <div className="container">
+        <h2>[ Proyectos Destacados ]</h2>
+        <div className={styles.grid}>
+          {projects?.map((p: Project) => (
+            <div key={p.id} className={`pixel-border ${styles.card}`}>
+
+              {p.image_url && (
+                <div className={styles.imgWrapper}>
+                  <Image
+                    src={p.image_url}
+                    alt={p.title}
+                    fill
+                    sizes="200px"
+                    className={styles.imgPixelated}
+                  />
+                </div>
+              )}
+
+              <h3 className={styles.title}>{p.title}</h3>
+              <p className={styles.description}>{p.short_description}</p>
+
+              <div className={styles.badges}>
+                {p.tech_stack?.map((t) => (
+                  <div key={t} className={styles.techIcon}>
+                    {techIcons[t] ? (
+                      <Image src={techIcons[t]} alt={t} width={23} height={18} className={styles.icon} />
+                    ) : (
+                      <span className="pixel-badge">{t}</span>
+                    )}
+                    <span className={styles.tooltip}>{t}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className={styles.buttons}>
+                {p.github_url && (
+                  <a href={p.github_url} target="_blank" rel="noopener noreferrer" className="pixel-btn">
+                    GitHub
+                  </a>
+                )}
+                {p.live_url && (
+                  <a href={p.live_url} target="_blank" rel="noopener noreferrer" className="pixel-btn">
+                    Live
+                  </a>
+                )}
+              </div>
+
             </div>
-            <div style={{ display: 'flex', gap: '0.75rem', marginTop: 'auto' }}>
-              <a href={p.github} className="pixel-btn">GitHub</a>
-              <a href={p.live} className="pixel-btn">Live</a>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   )

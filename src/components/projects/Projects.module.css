@@ -1,0 +1,151 @@
+.section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 200px 1fr auto;
+  grid-template-rows: auto 1fr auto;
+  gap: 0 1.5rem;
+  padding: 1.5rem;
+  align-items: start;
+}
+
+.imgWrapper {
+  grid-column: 1;
+  grid-row: 1 / 4;
+  width: 200px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 4px solid var(--primary);
+  position: relative;
+  align-self: center;
+}
+
+.imgPixelated {
+  object-fit: cover;
+  image-rendering: pixelated;
+  filter: grayscale(100%) contrast(1.2);
+  transition: filter 0.4s;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.imgWrapper:hover .imgPixelated {
+  filter: grayscale(0%) contrast(1);
+}
+
+.imgWrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--primary);
+  mix-blend-mode: multiply;
+  opacity: 0.6;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+
+.imgWrapper:hover::after {
+  opacity: 0;
+}
+
+.title {
+  grid-column: 2;
+  grid-row: 1;
+  color: var(--accent);
+}
+
+.description {
+  grid-column: 2;
+  grid-row: 2;
+  line-height: 2;
+  align-self: start;
+}
+
+.badges {
+  grid-column: 2;
+  grid-row: 3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-self: end;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.buttons {
+  grid-column: 3;
+  grid-row: 1 / 4;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-self: center;
+}
+
+.techIcon {
+  position: relative;
+  display: inline-flex;
+}
+
+.icon {
+  width: 23px;
+  height: 18px;
+  image-rendering: pixelated;
+  transform: scale(1.5);
+  margin: 0.5rem;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary);
+  color: var(--accent);
+  padding: 0.25rem 0.5rem;
+  font-family: var(--font);
+  font-size: 0.85rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 10;
+  border: 2px solid var(--border);
+}
+
+.techIcon:hover .tooltip {
+  opacity: 1;
+}
+
+@media (max-width: 767px) {
+  .card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .imgWrapper {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+  }
+
+  .title { grid-column: 1; grid-row: 2; }
+  .description { grid-column: 1; grid-row: 3; }
+  .badges { grid-column: 1; grid-row: 4; }
+  .buttons {
+    grid-column: 1;
+    grid-row: 5;
+    flex-direction: row;
+  }
+}
