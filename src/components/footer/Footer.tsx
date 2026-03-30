@@ -1,0 +1,64 @@
+import styles from './Footer.module.css'
+import Image from 'next/image'
+
+const links = [
+  { label: 'Sobre mí', href: '#sobre-mi' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Proyectos', href: '#proyectos' },
+  { label: 'Contacto', href: '#contacto' },
+]
+
+const socials = [
+  { name: 'LinkedIn', icon: '/icons/linkedin.png', url: 'https://linkedin.com/in/tu-usuario' },
+  { name: 'GitHub', icon: '/icons/github.png', url: 'https://github.com/tu-usuario' },
+  { name: 'Instagram', icon: '/icons/instagram.png', url: 'https://instagram.com/tu-usuario' },
+]
+
+export default function Footer() {
+  const year = new Date().getFullYear()
+
+  return (
+    <footer className={styles.footer}>
+      <div className={`container ${styles.container}`}>
+
+        <div className={styles.top}>
+
+          {/* Brand */}
+          <div className={styles.brand}>
+            <span className={styles.logo}>DG</span>
+            <p className={styles.tagline}>Creando, diseñando y construyendo en internet.</p>
+          </div>
+
+          {/* Nav */}
+          <div className={styles.nav}>
+            <p className={styles.navTitle}>Navegación</p>
+            {links.map((link) => (
+              <a key={link.href} href={link.href} className={styles.navLink}>
+                {link.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Socials */}
+          <div className={styles.socials}>
+            <p className={styles.socialsTitle}>Redes</p>
+            {socials.map((s) => (
+              <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
+                <Image src={s.icon} alt={s.name} width={23} height={18} className={styles.socialIcon} />
+                {s.name}
+              </a>
+            ))}
+          </div>
+
+        </div>
+
+        {/* Bottom */}
+        <div className={styles.bottom}>
+          <span>© {year} Daiana Del Grecco. Todos los derechos reservados.</span>
+          <span>Hecho con mucho amor.</span>
+        </div>
+
+      </div>
+    </footer>
+  )
+}
