@@ -1,17 +1,26 @@
-.block {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  margin-bottom: 80px;
+.section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
-.reverse {
-  flex-direction: row-reverse;
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 4rem;
+  align-items: center;
+}
+
+.block:last-child {
+  margin-bottom: 0;
 }
 
 .text {
-  max-width: 500px;
-  line-height: 1.6;
+  flex: 1;
+}
+
+.text p {
+  line-height: 2.2;
 }
 
 .imgWrapper {
@@ -19,12 +28,11 @@
   width: 280px;
   height: 280px;
   flex-shrink: 0;
-  border: 4px solid #0d0413;            /* borde oscuro */
-  box-shadow: 6px 6px 0px #000;      /* sombra más marcada */
-
-  background: #000;                  /* evita que la imagen toque el borde */
+  border: 4px solid var(--border);
+  box-shadow: 4px 4px 0px var(--secondary);
   overflow: hidden;
-  cursor: pointer;
+  cursor: url('/cursor/cursor-hand.png') 4 0, pointer;
+  background: var(--bg);
 }
 
 .imgPixel {
@@ -35,9 +43,8 @@
   height: 100%;
   object-fit: cover;
   image-rendering: pixelated;
-  filter: sepia(0.1) hue-rotate(310deg) saturate(1.5) contrast(1.1);
-  transition: opacity 0.3s;
-  opacity: 1;
+  opacity: 0;
+  transition: opacity 0.4s;
 }
 
 .imgReal {
@@ -47,14 +54,75 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: opacity 0.3s;
   opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.sprite {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%) scale(4.5);
+  width: 55px;
+  height: 50px;
+  background-image: url('/sprites/pcyo.png');
+  background-repeat: no-repeat;
+  background-size: 110px 50px;
+  image-rendering: pixelated;
+  animation: spritePlay 0.8s steps(2) infinite;
+  opacity: 1;
+  transition: opacity 0.2s;
+  z-index: 2;
+}
+
+@keyframes spritePlay {
+  from { background-position: 0px; }
+  to   { background-position: -110px; }
+}
+
+.hoverText {
+  position: absolute;
+  bottom: 1rem;
+  width: 100%;
+  text-align: center;
+  font-family: var(--font);
+  font-size: 1rem;
+  color: var(--accent);
+  z-index: 2;
+  opacity: 1;
+  transition: opacity 0.3s 0.6s;
+}
+
+/* Hover — entrada con orden */
+.imgWrapper:hover .sprite {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.imgWrapper:hover .hoverText {
+  opacity: 0;
+  transition: opacity 0.2s;
 }
 
 .imgWrapper:hover .imgPixel {
-  opacity: 0;
+  opacity: 1;
+  transition: opacity 0.3s 0.2s;
 }
 
 .imgWrapper:hover .imgReal {
   opacity: 1;
+  transition: opacity 0.4s 0.4s;
+}
+
+/* ── Media queries ── */
+
+@media (min-width: 768px) {
+  .block {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .reverse {
+    flex-direction: row-reverse;
+  }
 }
