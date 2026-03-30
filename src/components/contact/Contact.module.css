@@ -1,0 +1,165 @@
+/* Contact.module.css */
+
+.section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+/* ── Layout ─────────────────────────────────────────── */
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+  .layout {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 3rem;
+  }
+}
+
+/* ── Panel izquierdo ────────────────────────────────── */
+.social {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .social {
+    flex: 0 0 220px;
+  }
+}
+
+/* ── Bloque de texto intro ──────────────────────────── */
+.introBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.intro {
+  color: var(--accent);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.introSub {
+  color: var(--secondary);
+  font-size: 0.9rem;
+  margin: 0;
+  opacity: 0.85;
+}
+
+/* ── Bloque de redes ────────────────────────────────── */
+.socialBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.socialTitle {
+  color: var(--accent);
+  margin: 0 0 0.5rem;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.socialLink:hover {
+  color: var(--secondary);
+}
+
+.socialIcon {
+  width: 23px;
+  height: 18px;
+  image-rendering: pixelated;
+  flex-shrink: 0;
+}
+
+/* ── Badge disponible ───────────────────────────────── */
+.availableBlock {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.availableDot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--secondary);
+  flex-shrink: 0;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.availableText {
+  color: var(--secondary);
+  font-size: 0.9rem;
+}
+
+/* ── Formulario ─────────────────────────────────────── */
+.formWrapper {
+  flex: 1;
+  min-width: 0;
+  padding: 1.5rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--secondary);
+}
+
+.input,
+.textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 4px solid var(--primary);
+  color: var(--accent);
+  padding: 0.625rem;
+  font-family: var(--font);
+  font-size: 1.25rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: var(--secondary);
+}
+
+.textarea {
+  resize: none;
+}
+
+.status {
+  color: var(--secondary);
+  margin: 0;
+}
