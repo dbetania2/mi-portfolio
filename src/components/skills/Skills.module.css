@@ -1,0 +1,93 @@
+.section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cardTitle {
+  color: var(--secondary);
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.5rem;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--primary);
+}
+
+.iconWrapper {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.icon {
+  width: 23px;
+  height: 18px;
+  image-rendering: pixelated;
+  transform: scale(2);
+  margin: 0.5rem;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary);
+  color: var(--accent);
+  padding: 0.25rem 0.5rem;
+  font-family: var(--font);
+  font-size: 0.85rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 10;
+  border: 2px solid var(--border);
+}
+
+.iconWrapper:hover .tooltip {
+  opacity: 1;
+}
+
+.name {
+  font-size: 1.25rem;
+  color: var(--accent);
+  flex: 1;
+}
+
+.dots {
+  flex: 1;
+  border-bottom: 2px dotted var(--primary);
+  margin: 0 0.5rem;
+}
+
+.count {
+  font-size: 1.25rem;
+  color: var(--secondary);
+  flex-shrink: 0;
+}
