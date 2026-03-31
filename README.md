@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+![alt text](image.png)
+# 👾 Daiana Del Grecco | Portfolio Pixel Art
 
-## Getting Started
+Un portfolio Full Stack con estética retro de 8-bits, construido para demostrar habilidades en desarrollo web moderno, automatización y diseño de interfaces.
 
-First, run the development server:
+## 🚀 Stack Tecnológico
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
+- **Lenguaje:** [TypeScript](https://www.typescriptlang.org/)
+- **Base de Datos:** [Supabase](https://supabase.com/) (PostgreSQL)
+- **Estilos:** CSS Modules & Custom VT323 Typography
+- **Rendimiento:** Optimizado con Next/Image (LCP Priority)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Arquitectura y Componentes Clave
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 💎 Sistema de Iconos Modular (TechIcon)
+Se implementó un componente centralizado para la gestión de tecnologías. Mediante una librería de constantes, el componente adapta su escala y comportamiento (Tooltips) dependiendo de si se renderiza en la sección de **Skills** o en las **Cards de Proyectos**, reduciendo la duplicidad de estilos en un 60%.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🖼️ Image Lightbox Dinámico
+Componente a medida para la visualización de proyectos que incluye:
+- Efecto de zoom y overlay optimizado.
+- Manejo de estados para accesibilidad (Escape key / Scroll lock).
+- Carga prioritaria para imágenes *above-the-fold*.
 
-## Learn More
+### 📊 Contador de Visitas Persistente
+Integración con Supabase mediante funciones de base de datos (RPC) para el seguimiento de tráfico en tiempo real, manteniendo la estética de los contadores de la "vieja escuela" de la web.
 
-To learn more about Next.js, take a look at the following resources:
+### 🎨 Pixel-Perfect UI
+- Cursores personalizados (flecha y mano pixelada).
+- Animaciones CSS basadas en *steps* para sprites de personajes.
+- Layout totalmente responsivo utilizando CSS Grid y Flexbox.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📁 Estructura del Proyecto
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```text
+src/
+├── app/             # Rutas y Server Components (Next.js 15)
+├── components/      # UI Components reutilizables (TechIcon, Lightbox, etc)
+├── lib/             # Clientes de API y utilidades (Supabase, Icon mappings)
+└── public/          # Activos estáticos, cursores y SVGs

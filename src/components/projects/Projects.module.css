@@ -1,0 +1,192 @@
+/* ── Sección y Contenedores ──────────────────────────── */
+.section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.group {
+  margin-top: 2.5rem;
+}
+
+.groupTitle {
+  color: var(--secondary);
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ── Card (Ajuste de columnas para imagen grande) ────── */
+.card {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr) minmax(0, auto);
+  grid-template-rows: auto 1fr auto;
+  gap: 0 2rem;
+  padding: 1.5rem;
+  align-items: start;
+  background: var(--bg);
+  border: 4px solid var(--primary);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+  z-index: 5;
+}
+
+/* ── Imagen (Grande y con Efecto B&W) ───────────────── */
+.imgWrapper {
+  position: relative;
+  grid-column: 1;
+  grid-row: 1 / 4;
+  width: 280px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 4px solid var(--primary);
+  align-self: center;
+  background: #000;
+}
+
+.imgPixelated {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  image-rendering: pixelated;
+  filter: grayscale(100%) contrast(1.2);
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.card:hover .imgPixelated {
+  filter: grayscale(0%) contrast(1);
+  transform: scale(1.05);
+}
+
+/* ── Contenido de Texto ──────────────────────────────── */
+.title {
+  grid-column: 2;
+  grid-row: 1;
+  color: var(--accent);
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.description {
+  grid-column: 2;
+  grid-row: 2;
+  line-height: 1.8;
+  align-self: start;
+  color: var(--accent);
+  opacity: 0.9;
+}
+
+.badges {
+  grid-column: 2;
+  grid-row: 3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-self: end;
+  padding-top: 1rem;
+}
+
+/* ── Botones Laterales ───────────────────────────────── */
+.buttons {
+  grid-column: 3;
+  grid-row: 1 / 4;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-self: end;
+}
+
+.cardBtn {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  background: transparent;
+  color: var(--secondary);
+  font-family: var(--font);
+  font-size: 1.1rem;
+  border: 2px solid var(--primary);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.cardBtn:hover {
+  color: var(--accent);
+  border-color: var(--secondary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.verMasGroup {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2.5rem;
+}
+
+/* ── Media Queries (Responsive) ─────────────────────── */
+@media (max-width: 1024px) {
+  .card {
+    grid-template-columns: 220px minmax(0, 1fr) minmax(0, auto);
+    gap: 0 1.5rem;
+  }
+  .imgWrapper {
+    width: 220px;
+  }
+}
+
+@media (max-width: 767px) {
+  .card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 1rem;
+    padding: 1.25rem;
+  }
+
+  .imgWrapper {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .title {
+    grid-column: 1;
+    grid-row: 2;
+    font-size: 1.5rem;
+  }
+
+  .description {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .badges {
+    grid-column: 1;
+    grid-row: 4;
+    padding-bottom: 1rem;
+  }
+
+  .buttons {
+    grid-column: 1;
+    grid-row: 5;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .buttons a {
+    flex: 1;
+    min-width: 100px;
+  }
+}

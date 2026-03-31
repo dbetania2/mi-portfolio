@@ -10,15 +10,19 @@
   --font: 'VT323', monospace;
 }
 
+/* ── Reset y Configuración Global ── */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   image-rendering: pixelated;
+  /* El auto al final es obligatorio para que funcione la imagen personalizada */
+  cursor: url('/cursor/cursor.png'), auto;
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
@@ -27,6 +31,92 @@ body {
   font-family: var(--font);
   font-size: 1.25rem;
   line-height: 1.8;
+  overflow-x: hidden;
+  /* Reforzamos el cursor en el body */
+  cursor: url('/cursor/cursor.png'), auto;
+}
+
+/* ── Franjas de Fondo Animadas ── */
+body::before {
+  content: '';
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background-image: url('/images/fondoinicio.png');
+  background-repeat: repeat-x;
+  background-size: 128px 40px;
+  image-rendering: pixelated;
+  opacity: 0.4;
+  z-index: 0;
+  pointer-events: none;
+  animation: move-bg-right auto linear;
+  animation-timeline: scroll(root);
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background-image: url('/images/fondoinicio.png');
+  background-repeat: repeat-x;
+  background-size: 128px 40px;
+  image-rendering: pixelated;
+  transform: scaleY(-1);
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  animation: move-bg-left auto linear;
+  animation-timeline: scroll(root);
+}
+
+@keyframes move-bg-right {
+  from { background-position: 0px 0px; }
+  to { background-position: 100vw 0px; }
+}
+
+@keyframes move-bg-left {
+  from { background-position: 0px 0px; }
+  to { background-position: -100vw 0px; }
+}
+
+/* ── Gradientes de Sombra (Main) ── */
+main {
+  position: relative;
+  z-index: 1;
+}
+
+main::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 15vh;
+  background: linear-gradient(to bottom, var(--bg) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+main::after {
+  content: '';
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 15vh;
+  background: linear-gradient(to top, var(--bg) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ── Tipografía y Enlaces Base ── */
+a, button, .pixel-btn, .navbar-hamburger, [role="button"] {
+  cursor: url('/cursor/mano.png') 12 0, pointer !important;
 }
 
 a {
@@ -41,11 +131,11 @@ a:hover {
 section {
   padding: 3rem 1.25rem;
   width: 100%;
+  scroll-margin-top: 5rem;
 }
 
-/* Contenedor interno reutilizable para que no crezca al infinito */
 .container {
-  max-width: 56.25rem; /* Aprox 900px */
+  max-width: 80.25rem;
   margin: 0 auto;
 }
 
@@ -54,8 +144,7 @@ h2 { font-size: 1.5rem; color: var(--accent); margin-bottom: 1.5rem; }
 h3 { font-size: 1.25rem; color: var(--primary); }
 p  { font-size: 1.25rem; }
 
-/* ── Utilidades ── */
-
+/* ── Utilidades (Legos) ── */
 .pixel-border {
   border: 4px solid var(--border);
   box-shadow: 4px 4px 0px var(--secondary);
@@ -69,9 +158,10 @@ p  { font-size: 1.25rem; }
   font-family: var(--font);
   font-size: 1.25rem;
   border: 4px solid var(--border);
-  cursor: pointer;
   box-shadow: 4px 4px 0px var(--secondary);
   transition: box-shadow 0.1s, transform 0.1s;
+  text-decoration: none;
+  text-align: center;
 }
 
 .pixel-btn:hover {
@@ -95,8 +185,7 @@ p  { font-size: 1.25rem; }
   font-family: var(--font);
 }
 
-/* ── Chibi ── */
-
+/* ── Animación Base Chibi ── */
 .chibi {
   width: 48px;
   height: 59px;
@@ -112,64 +201,13 @@ p  { font-size: 1.25rem; }
   to   { background-position: -144px; }
 }
 
-/* ── Hero ── */
-
-.hero-layout {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  width: 100%;
-  gap: 2rem;
-}
-
-.hero-text {
-  width: 100%;
-}
-
-/* Contenedor de botones (Centrado por defecto en móviles) */
-.hero-buttons {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.hero-sprite-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 150px;
-  height: 150px;
-
-  flex-shrink: 0;
-
-  background-image: url('/sprites/fondochibi.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-
-  image-rendering: pixelated;
-}
-
-.chibi-scaled {
-  position: relative;
-  z-index: 1;
-  transform: scale(2);
-  image-rendering: pixelated;
-}
-
 /* ── Navbar ── */
-
 .navbar-hamburger {
   display: none;
   background: none;
   border: none;
   color: var(--accent);
   font-size: 1.5rem;
-  cursor: pointer;
   font-family: var(--font);
 }
 
@@ -178,63 +216,10 @@ p  { font-size: 1.25rem; }
   gap: 2rem;
 }
 
-/* ── Media queries ── */
-
-@media (min-width: 768px) {
-  h1 { font-size: 3rem; }
-  h2 { font-size: 1.75rem; }
-  section { padding: 4rem 1.5rem; }
-
-  .hero-sprite-container {
-    width: 300px;
-    height: 300px;
-  }
-
-  .chibi-scaled {
-    transform: scale(4);
-  }
-}
-
-@media (min-width: 1024px) {
-  h1 { font-size: 3.5rem; }
-  h2 { font-size: 2rem; }
-  section { padding: 5rem 1.5rem; }
-
-  /* 🔥 FIX: Layout horizontal, centrado y con espacio controlado */
-  .hero-layout {
-    flex-direction: row;
-    justify-content: center;
-    text-align: left;
-    align-items: center;
-    gap: 4rem; 
-  }
-
-  .hero-text {
-    flex: 1;
-  }
-
-  /*Botones alineados a la izquierda junto con el texto en desktop */
-  .hero-buttons {
-    justify-content: flex-start;
-  }
-
-  .hero-sprite-container {
-    flex: 3;
-    max-width: 500px; 
-    height: auto;
-    aspect-ratio: 1 / 1;
-  }
-
-  .chibi-scaled {
-    transform: scale(7);
-  }
-}
-
 @media (max-width: 767px) {
   .navbar-hamburger {
     display: block;
   }
-
   .navbar-links {
     display: none;
   }
