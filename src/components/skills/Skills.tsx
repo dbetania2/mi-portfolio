@@ -1,9 +1,9 @@
 import { supabase } from '@/lib/supabase'
 import styles from './Skills.module.css'
-import Image from 'next/image'
-import { techIcons, techCategories } from '@/lib/techIcons'
+import { techCategories } from '@/lib/techIcons'
+import TechIcon from '@/components/TechIcon/TechIcon'
 
-const categoryOrder = ['Frontend', 'Backend', 'Tools'] as const
+const categoryOrder = ['Frontend', 'Backend', 'Tools', 'Automatización'] as const
 
 export default async function Skills() {
   const { data: projects } = await supabase
@@ -38,20 +38,10 @@ export default async function Skills() {
                 <h3 className={styles.cardTitle}>{cat}</h3>
                 {grouped[cat].map(([name, count]) => (
                   <div key={name} className={styles.row}>
-                    <div className={styles.iconWrapper}>
-                      {techIcons[name] ? (
-                        <Image
-                          src={techIcons[name]}
-                          alt={name}
-                          width={23}
-                          height={18}
-                          className={styles.icon}
-                        />
-                      ) : (
-                        <span className="pixel-badge">{name}</span>
-                      )}
-                      <span className={styles.tooltip}>{name}</span>
-                    </div>
+                    
+                    {/* Componente reutilizable con tamaño grande para Skills */}
+                    <TechIcon name={name} size="large" />
+
                     <span className={styles.name}>{name}</span>
                     <span className={styles.dots} />
                     <span className={styles.count}>x{count}</span>
