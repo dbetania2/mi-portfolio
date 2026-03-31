@@ -1,0 +1,7 @@
+ /*layout*/
+.content {
+  min-height: 100vh;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--padding-x);
+}

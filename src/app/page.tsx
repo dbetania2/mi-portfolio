@@ -10,16 +10,13 @@ import Footer from '@/components/footer/Footer'
 
 
 export default async function Home() {
-
   return (
     <main>
-      <Navbar />
       <Hero />
       <About />
       <Skills />
       <Projects />
       <Contact />
-      <Footer />
     </main>
   )
 }
