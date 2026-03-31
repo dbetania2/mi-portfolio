@@ -41,13 +41,11 @@ export default function About() {
             alt="Daiana de pequeña"
           />
           <div className={styles.text}>
-            <p>Hola, soy Daiana — desarrolladora Full Stack.</p>
+            <p>Hola, soy Daiana, desarrolladora Full Stack.</p>
             <br />
             <p>
-              Desde pequeña, mi infancia moldeó mi fascinación por la tecnología
-              e internet. Todo empezó frente a mi primera computadora, donde
-              descubrí que las pantallas podían ser mundos enteros.
-            </p>
+Todo comenzó de pequeña, frente a mi primera computadora.             </p>
+          <p>Desde ese momento, la curiosidad por la tecnología pasó a formar parte de mi día a día y terminó convirtiéndose en el camino que hoy sigo como desarrolladora.</p>
           </div>
         </div>
 
@@ -58,14 +56,14 @@ export default function About() {
             alt="Daiana frente a la computadora"
           />
           <div className={styles.text}>
-            <p>Siempre tuve dos maneras de ver el mundo.</p>
+            <p>Siempre sentí que tenía dos formas de ver el mundo.</p>
             <br />
-            <p>Mi lado artístico me impulsa a explorar la fantasía y lo estético.</p>
-            <p>Mi lado lógico me lleva a buscar el orden en la complejidad.</p>
+            <p>Por un lado, mi lado artístico me impulsa a imaginar, diseñar y dar vida a ideas con una mirada estética y creativa.</p>
+            <p>Por otro, mi lado lógico me lleva a buscar estructura, orden y soluciones dentro de la complejidad.</p>
             <br />
             <p>
-              Aquella niña creció y hoy explota su creatividad — creando,
-              diseñando y construyendo ideas.
+              Hoy, esa combinación guía mi trabajo.Desarrollo aplicaciones funcionales, claras e intuitivas.
+              Aquella niña curiosa creció, y hoy transforma esa misma fascinación por la tecnología en cada proyecto que diseña y construye.
             </p>
           </div>
         </div>
