@@ -1,40 +1,55 @@
-![alt text](image.png)
-# 👾 Daiana Del Grecco | Portfolio Pixel Art
+# 👾 Daiana Del Grecco — Portfolio
 
-Un portfolio Full Stack con estética retro de 8-bits, construido para demostrar habilidades en desarrollo web moderno, automatización y diseño de interfaces.
+Portfolio web personal con estética pixel art, construido con Next.js, TypeScript, Supabase y CSS Modules.
 
-## 🚀 Stack Tecnológico
+Siempre me gustó el pixel art y quería ver si podía llevarlo a una web real. Este proyecto fue la excusa perfecta para intentarlo, y terminó siendo mucho más que una página de presentación.
 
-- **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
-- **Lenguaje:** [TypeScript](https://www.typescriptlang.org/)
-- **Base de Datos:** [Supabase](https://supabase.com/) (PostgreSQL)
-- **Estilos:** CSS Modules & Custom VT323 Typography
-- **Rendimiento:** Optimizado con Next/Image (LCP Priority)
+---
 
-## 🛠️ Arquitectura y Componentes Clave
+## Tecnologías
 
-### 💎 Sistema de Iconos Modular (TechIcon)
-Se implementó un componente centralizado para la gestión de tecnologías. Mediante una librería de constantes, el componente adapta su escala y comportamiento (Tooltips) dependiendo de si se renderiza en la sección de **Skills** o en las **Cards de Proyectos**, reduciendo la duplicidad de estilos en un 60%.
+Next.js como framework principal, TypeScript para tipar todo el proyecto, Supabase como base de datos, CSS Modules para los estilos y la fuente VT323 para mantener la estética retro en cada texto.
 
-### 🖼️ Image Lightbox Dinámico
-Componente a medida para la visualización de proyectos que incluye:
-- Efecto de zoom y overlay optimizado.
-- Manejo de estados para accesibilidad (Escape key / Scroll lock).
-- Carga prioritaria para imágenes *above-the-fold*.
+---
 
-### 📊 Contador de Visitas Persistente
-Integración con Supabase mediante funciones de base de datos (RPC) para el seguimiento de tráfico en tiempo real, manteniendo la estética de los contadores de la "vieja escuela" de la web.
+## Funcionalidades y decisiones técnicas
 
-### 🎨 Pixel-Perfect UI
-- Cursores personalizados (flecha y mano pixelada).
-- Animaciones CSS basadas en *steps* para sprites de personajes.
-- Layout totalmente responsivo utilizando CSS Grid y Flexbox.
+**Componente de iconos reutilizable**
+Todos los iconos de tecnologías del sitio pasan por un mismo componente. Así el tamaño, el tooltip y el estilo son consistentes en cualquier lugar donde aparezcan, sin repetir código.
 
-## 📁 Estructura del Proyecto
+**Lightbox de proyectos**
+Los proyectos se abren en un visor tipo galería hecho desde cero, sin librerías externas. Tiene zoom, overlay, navegación con teclado y bloqueo de scroll. Quería que se sintiera como una UI de verdad, no un componente genérico.
 
-```text
+**Animaciones con `steps()`**
+Las animaciones no son suaves ni lineales. Usan `steps()` para imitar el movimiento de los sprites, que es exactamente como se mueven los personajes en los juegos de pixel art.
+
+**Contador de visitas**
+Tiene un contador persistente con Supabase, inspirado en los contadores clásicos de los sitios de los 2000. No era necesario. Pero encajaba perfecto con la estética y me pareció divertido hacerlo.
+
+**Cursores personalizados**
+Hasta los cursores son pixelados. Cada detalle cuenta.
+
+---
+
+## Intención
+
+Este portfolio es mi proof of code. Una forma de mostrar cómo pienso, cómo organizo un proyecto y cómo tomo decisiones de diseño y desarrollo al mismo tiempo.
+
+Quería demostrar que puedo crear una estética coherente de principio a fin, no solo escribir código que funcione. El pixel art fue el desafío visual, y Next.js con Supabase fue la base técnica para sostenerlo.
+
+El rosa no fue un accidente.
+
+---
+
+## Estructura del proyecto
+```
 src/
-├── app/             # Rutas y Server Components (Next.js 15)
-├── components/      # UI Components reutilizables (TechIcon, Lightbox, etc)
-├── lib/             # Clientes de API y utilidades (Supabase, Icon mappings)
-└── public/          # Activos estáticos, cursores y SVGs
+├── app/          → Rutas y Server Components
+├── components/   → Componentes reutilizables
+├── lib/          → Utilidades (Supabase, iconos, helpers)
+└── public/       → Imágenes, cursores y assets
+```
+
+---
+
+👾
