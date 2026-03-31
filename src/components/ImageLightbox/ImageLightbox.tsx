@@ -7,9 +7,10 @@ import styles from './ImageLightbox.module.css'
 type Props = {
   src: string
   alt: string
+  priority?: boolean
 }
 
-export default function ImageLightbox({ src, alt }: Props) {
+export default function ImageLightbox({ src, alt, priority = false }: Props) {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
@@ -42,7 +43,7 @@ export default function ImageLightbox({ src, alt }: Props) {
           fill
           sizes="(max-width: 768px) 100vw, 1200px"
           className={styles.img}
-          priority
+          priority={priority}
         />
         <span className={styles.imgHint}>[ click para ampliar ]</span>
       </div>

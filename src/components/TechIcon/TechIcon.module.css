@@ -8,32 +8,31 @@
 
 .wrapper:hover {
   transform: translateY(-5px) scale(1.1);
-  z-index: 50; /* Asegura que el tooltip flote sobre todo */
+  z-index: 50; 
 }
 
-/* ... el resto de tu css (wrapper, tooltip, etc) queda igual ... */
+
 
 .icon {
   width: 23px;
   height: 18px;
   image-rendering: pixelated;
   margin: 0.5rem;
-  /* Quitamos el transform de aquí para que lo controlen las clases de abajo */
+
 }
 
 /* ── Variantes de Tamaño ── */
 
-/* Para SKILLS (Equivale a tu scale(2) original) */
+
 .large .icon {
   transform: scale(2);
 }
 
-/* Para PROJECTS (Equivale a tu scale(1.5) original) */
+
 .medium .icon {
   transform: scale(1.5);
 }
 
-/* Por si necesitas uno más pequeño en el futuro */
 .small .icon {
   transform: scale(1.2);
 }

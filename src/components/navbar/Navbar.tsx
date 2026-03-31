@@ -24,11 +24,9 @@ export default function Navbar() {
   const isHome = pathname === '/'
 
   const getHref = (link: NavLink): string => {
-    // Si es una ruta (como /projects), devolvemos el href tal cual
     if (link.isRoute) return link.href
-    
-    // Si estamos en el home, usamos solo el ancla (#sobre-mi)
-    // Si no estamos en el home, agregamos la barra delante (/#sobre-mi)
+
+
     return isHome ? link.href : `/${link.href}`
   }
 

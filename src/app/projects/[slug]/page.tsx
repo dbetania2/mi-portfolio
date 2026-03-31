@@ -31,7 +31,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         <p className={styles.shortDescription}>{project.short_description}</p>
 
         {project.image_url && (
-          <ImageLightbox src={project.image_url} alt={project.title} />
+          <ImageLightbox src={project.image_url} alt={project.title} priority={true} />
         )}
 
         <div className={styles.body}>

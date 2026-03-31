@@ -4,12 +4,12 @@ import { techIcons } from '@/lib/techIcons'
 
 interface TechIconProps {
   name: string
-  // Agregamos una prop opcional por si queremos tamaños distintos en el futuro
+  
   size?: 'small' | 'medium' | 'large' 
 }
 
 export default function TechIcon({ name, size = 'medium' }: TechIconProps) {
-  // Buscamos si existe el ícono en tu librería
+  
   const iconSrc = techIcons[name]
 
   return (

@@ -26,7 +26,7 @@
   align-items: center;
 }
 
-/* ── 1. Textos Específicos (Colores) ── */
+
 
 .greeting {
   color: var(--secondary); /* Rosa */
@@ -40,8 +40,8 @@
 }
 
 .description {
-  color: var(--accent); /* Usa tu color durazno/hueso del root */
-  font-size: 1.5rem;    /* Tamaño agrandado */
+  color: var(--accent); 
+  font-size: 1.5rem;    
   max-width: 35rem;     
   margin-bottom: 2.5rem;
   line-height: 1.8;
@@ -49,7 +49,7 @@
   margin-right: auto;
 }
 
-/* ── 2. Efecto en el Nombre ── */
+
 .nameContainer {
   display: block;
   margin-bottom: 0.5rem;
@@ -57,14 +57,14 @@
 
 .letter {
   display: inline-block;
-  color: var(--accent); /* Tu nombre ahora nace con el color accent */
+  color: var(--accent); 
   transition: color 0.2s ease, transform 0.2s ease;
   white-space: pre;
   cursor: default;
 }
 
 .letter:hover {
-  color: var(--secondary) !important; /* Pasa a Rosa al pasar el mouse */
+  color: var(--secondary) !important; 
   transform: translateY(-5px);
 }
 
