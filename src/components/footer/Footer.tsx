@@ -1,5 +1,6 @@
 import styles from './Footer.module.css'
 import Image from 'next/image'
+import VisitorCounter from '../VisitorCounter/VisitorCounter'
 
 const links = [
   { label: 'Sobre mí', href: '#sobre-mi' },
@@ -14,7 +15,7 @@ const socials = [
   { name: 'Instagram', icon: '/icons/instagram.png', url: 'https://instagram.com/tu-usuario' },
 ]
 
-export default function Footer() {
+export default async function Footer() {
   const year = new Date().getFullYear()
 
   return (
@@ -22,7 +23,6 @@ export default function Footer() {
       <div className={`container ${styles.container}`}>
 
         <div className={styles.top}>
-
           {/* Brand */}
           <div className={styles.brand}>
             <span className={styles.logo}>DG</span>
@@ -49,8 +49,10 @@ export default function Footer() {
               </a>
             ))}
           </div>
-
         </div>
+
+        {/* CONTADOR 👇 */}
+        <VisitorCounter />
 
         {/* Bottom */}
         <div className={styles.bottom}>
