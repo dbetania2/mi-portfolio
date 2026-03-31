@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     title: 'Daiana Del Grecco',
     description:
       'Desarrollo web, automatización de procesos y diseño de interfaces.',
-    url: 'https://tudominio.com', 
+    url: 'daianadg-portfolio.vercel.app', 
     siteName: 'Portfolio Daiana',
     images: [
       {
