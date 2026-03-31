@@ -1,0 +1,63 @@
+.wrapper {
+  position: relative;
+  display: inline-flex;
+  transition: transform 0.2s ease;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper:hover {
+  transform: translateY(-5px) scale(1.1);
+  z-index: 50; /* Asegura que el tooltip flote sobre todo */
+}
+
+/* ... el resto de tu css (wrapper, tooltip, etc) queda igual ... */
+
+.icon {
+  width: 23px;
+  height: 18px;
+  image-rendering: pixelated;
+  margin: 0.5rem;
+  /* Quitamos el transform de aquí para que lo controlen las clases de abajo */
+}
+
+/* ── Variantes de Tamaño ── */
+
+/* Para SKILLS (Equivale a tu scale(2) original) */
+.large .icon {
+  transform: scale(2);
+}
+
+/* Para PROJECTS (Equivale a tu scale(1.5) original) */
+.medium .icon {
+  transform: scale(1.5);
+}
+
+/* Por si necesitas uno más pequeño en el futuro */
+.small .icon {
+  transform: scale(1.2);
+}
+
+/* Tooltip Universal */
+.tooltip {
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary);
+  color: var(--accent);
+  padding: 0.3rem 0.6rem;
+  font-family: var(--font);
+  font-size: 0.8rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 100;
+  border: 2px solid var(--border);
+}
+
+.wrapper:hover .tooltip {
+  opacity: 1;
+}
+
