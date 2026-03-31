@@ -1,19 +1,48 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import styles from './Contact.module.css'
 import Image from 'next/image'
 
+const FORMSPREE_URL = 'https://formspree.io/f/mnjovjev'
+
+type Status = 'idle' | 'sending' | 'success' | 'error'
+
 export default function Contact() {
-  const [nombre, setNombre] = useState('')
-  const [email, setEmail] = useState('')
+  const [nombre,  setNombre]  = useState('')
+  const [email,   setEmail]   = useState('')
+  const [asunto,  setAsunto]  = useState('')
   const [mensaje, setMensaje] = useState('')
-  const [status, setStatus] = useState('')
+  const [status,  setStatus]  = useState<Status>('idle')
+
+  const honeypotRef = useRef<HTMLInputElement>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setStatus('Enviando...')
-    setTimeout(() => setStatus('✓ Mensaje enviado!'), 1000)
+
+    if (honeypotRef.current?.value) return
+
+    setStatus('sending')
+
+    try {
+      const res = await fetch(FORMSPREE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre, email, asunto, mensaje }),
+      })
+
+      if (res.ok) {
+        setStatus('success')
+        setNombre('')
+        setEmail('')
+        setAsunto('')
+        setMensaje('')
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -31,6 +60,7 @@ export default function Contact() {
                 Contactame para hablar de un proyecto,<br />
                 una colaboración, o simplemente para decir hola.
               </p>
+              
             </div>
 
             <div className={styles.socialBlock}>
@@ -64,6 +94,17 @@ export default function Contact() {
           <div className={`pixel-border ${styles.formWrapper}`}>
             <form onSubmit={handleSubmit} className={styles.form}>
 
+              {/* Honeypot */}
+              <input
+                ref={honeypotRef}
+                type="text"
+                name="_gotcha"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                style={{ display: 'none' }}
+              />
+
               <div className={styles.field}>
                 <label className={styles.label}>&gt; nombre:</label>
                 <input
@@ -87,6 +128,17 @@ export default function Contact() {
               </div>
 
               <div className={styles.field}>
+                <label className={styles.label}>&gt; asunto:</label>
+                <input
+                  type="text"
+                  value={asunto}
+                  onChange={(e) => setAsunto(e.target.value)}
+                  required
+                  className={styles.input}
+                />
+              </div>
+
+              <div className={styles.field}>
                 <label className={styles.label}>&gt; mensaje:</label>
                 <textarea
                   value={mensaje}
@@ -97,11 +149,21 @@ export default function Contact() {
                 />
               </div>
 
-              <button type="submit" className="pixel-btn" style={{ alignSelf: 'flex-start' }}>
-                Enviar mensaje
+              <button
+                type="submit"
+                className="pixel-btn"
+                disabled={status === 'sending'}
+                style={{ alignSelf: 'flex-start' }}
+              >
+                {status === 'sending' ? 'Enviando...' : 'Enviar mensaje'}
               </button>
 
-              {status && <p className={styles.status}>{status}</p>}
+              {status === 'success' && (
+                <p className={styles.statusSuccess}>✓ Mensaje enviado. Te respondo pronto.</p>
+              )}
+              {status === 'error' && (
+                <p className={styles.statusError}>✗ Algo falló. Intentá de nuevo.</p>
+              )}
 
             </form>
           </div>

@@ -8,10 +8,22 @@ function PhotoCard({ pixelSrc, realSrc, alt }: {
 }) {
   return (
     <div className={styles.imgWrapper}>
-      <Image src={pixelSrc} alt={alt} fill className={styles.imgPixel} />
-      <Image src={realSrc} alt={alt} fill className={styles.imgReal} />
+      <Image 
+        src={pixelSrc} 
+        alt={alt} 
+        fill 
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        className={styles.imgPixel} 
+      />
+      <Image 
+        src={realSrc} 
+        alt={alt} 
+        fill 
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        className={styles.imgReal} 
+      />
       <div className={styles.sprite} />
-      <p className={styles.hoverText}>Posa el mouse</p>
+      <p className={styles.hoverText}></p> 
     </div>
   )
 }
@@ -20,9 +32,8 @@ export default function About() {
   return (
     <section id="sobre-mi" className={styles.section}>
       <div className="container">
-        <h2>[ Sobre mí ]</h2>
+        <h2 style={{ marginBottom: '3rem' }}>[ Sobre mí ]</h2>
 
-        {/* Bloque 1 — foto izquierda */}
         <div className={styles.block}>
           <PhotoCard
             pixelSrc="/images/yo2p.jpg"
@@ -40,7 +51,6 @@ export default function About() {
           </div>
         </div>
 
-        {/* Bloque 2 — foto derecha */}
         <div className={`${styles.block} ${styles.reverse}`}>
           <PhotoCard
             pixelSrc="/images/yo3p.jpg"
@@ -51,7 +61,6 @@ export default function About() {
             <p>Siempre tuve dos maneras de ver el mundo.</p>
             <br />
             <p>Mi lado artístico me impulsa a explorar la fantasía y lo estético.</p>
-            <br />
             <p>Mi lado lógico me lleva a buscar el orden en la complejidad.</p>
             <br />
             <p>
@@ -60,7 +69,6 @@ export default function About() {
             </p>
           </div>
         </div>
-
       </div>
     </section>
   )

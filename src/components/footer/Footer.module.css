@@ -1,20 +1,24 @@
+/* ── Footer ──────────────────────────────────────────── */
 .footer {
   padding: 3rem 1.25rem 5rem;
   border-top: 4px solid var(--primary);
 }
 
+/* ── Contenedor ──────────────────────────────────────── */
 .container {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
+/* ── Parte superior ──────────────────────────────────── */
 .top {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
+/* ── Brand ───────────────────────────────────────────── */
 .brand {
   display: flex;
   flex-direction: column;
@@ -31,6 +35,7 @@
   font-size: 1.1rem;
 }
 
+/* ── Navegación ──────────────────────────────────────── */
 .nav {
   display: flex;
   flex-direction: column;
@@ -53,6 +58,7 @@
   color: var(--accent);
 }
 
+/* ── Redes sociales ──────────────────────────────────── */
 .socials {
   display: flex;
   flex-direction: column;
@@ -85,16 +91,18 @@
   flex-shrink: 0;
 }
 
+/* ── Parte inferior ──────────────────────────────────── */
 .bottom {
-  border-top: 2px solid var(--primary);
-  padding-top: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--primary);
   color: var(--secondary);
   font-size: 1rem;
 }
 
+/* ── Media queries ───────────────────────────────────── */
 @media (min-width: 768px) {
   .top {
     flex-direction: row;

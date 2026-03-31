@@ -1,6 +1,8 @@
 import styles from './Hero.module.css'
 
 export default function Hero() {
+  const name = "Daiana Del Grecco";
+
   return (
     <section id="hero" className={styles.section}>
       <div className={styles.layout}>
@@ -10,18 +12,33 @@ export default function Hero() {
         </div>
 
         <div className={styles.text}>
-          <p style={{ color: 'var(--border)', marginBottom: '0.75rem' }}>
+          
+          <p className={styles.greeting}>
             &gt; Hola, soy
           </p>
-          <h1>Daiana Del Grecco</h1>
-          <h2>Full Stack Developer</h2>
-          <p style={{ maxWidth: '35rem', marginBottom: '2.5rem', lineHeight: '2' }}>
-            Construyo productos digitales con código limpio y diseño con personalidad.
+          
+          <h1 className={styles.nameContainer}>
+            {name.split("").map((letter, index) => (
+              <span key={index} className={styles.letter}>
+                {letter === " " ? "\u00A0" : letter}
+              </span>
+            ))}
+          </h1>
+
+          <h2 className={styles.role}>
+            Full Stack Developer
+          </h2>
+
+          {/* Le quitamos los estilos en línea, ahora todo lo controla la clase .description */}
+          <p className={styles.description}>
+            Desarrollo web, automatización de procesos y diseño de interfaces.
           </p>
+          
           <div className={styles.buttons}>
             <a href="#proyectos" className="pixel-btn">Ver proyectos</a>
             <a href="#contacto" className="pixel-btn">Contacto</a>
           </div>
+          
         </div>
 
       </div>
