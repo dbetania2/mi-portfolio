@@ -19,6 +19,7 @@ export const techIcons: Record<string, string> = {
   'Zapier':            '/icons/tech/zapier.png',
   'n8n':               '/icons/tech/n8n.png',
   'Selenium':          '/icons/tech/selenium.png',
+  'Figma':          '/icons/tech/figma.png',
 }
 
 export const techCategories: Record<string, 'Frontend' | 'Backend' | 'Tools' | 'Automatización'> = {
@@ -34,6 +35,7 @@ export const techCategories: Record<string, 'Frontend' | 'Backend' | 'Tools' | '
   'Git':               'Tools',
   'Aseprite':          'Tools',
   'PowerBI':           'Tools',
+  'Figma':           'Tools',
   'Make':              'Automatización',
   'Activepieces':      'Automatización',
   'Gemini':            'Automatización',
