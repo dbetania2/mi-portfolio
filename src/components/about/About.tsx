@@ -22,7 +22,7 @@ export default function About() {
         <article className={styles.row}>
           <div className={styles.visualCol}>
             <div className={`${styles.sprite} ${styles.bobRoss}`} />
-            <p className={styles.quote}>"No cometemos errores, solo felices accidentes."</p>
+            <p className={styles.quote}>"We don't make mistakes, we just have happy accidents"</p>
           </div>
           <div className={styles.textCol}>
             <h3 className={styles.blockTitle}> Diseño</h3>
