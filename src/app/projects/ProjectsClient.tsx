@@ -54,12 +54,10 @@ export default function ProjectsClient({ projects }: { projects: Project[] }) {
             )}
 
             <h3 className={styles.title}>{p.title}</h3>
-            <p className={styles.description}>{p.short_description}</p>
 
             <div className={styles.badges}>
               {p.tech_stack?.map((t) => (
-                /* Usamos el componente universal con tamaño medium */
-                <TechIcon key={t} name={t} size="medium" />
+                <TechIcon key={t} name={t} size="small" />
               ))}
             </div>
 
