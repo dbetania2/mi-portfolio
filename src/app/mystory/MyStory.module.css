@@ -1,0 +1,145 @@
+/* ── Sección ─────────────────────────────────────────── */
+.section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+/* ── Bloque texto + imagen ───────────────────────────── */
+.block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.block:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Texto ───────────────────────────────────────────── */
+.text {
+  flex: 1;
+}
+
+.text p {
+  line-height: 2.2;
+}
+
+/* ── Imagen interactiva ──────────────────────────────── */
+.imgWrapper {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: var(--bg);
+  border: 4px solid var(--border);
+  box-shadow: 4px 4px 0px var(--secondary);
+  cursor: url('/cursor/cursor-hand.png') 4 0, pointer;
+}
+
+.imgPixel,
+.imgReal {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.imgPixel {
+  image-rendering: pixelated;
+}
+
+/* ── Sprite animado ──────────────────────────────────── */
+.sprite {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  width: 55px;
+  height: 50px;
+  transform: translate(-50%, -60%) scale(4.5);
+  background-image: url('/sprites/pcyo.png');
+  background-repeat: no-repeat;
+  background-size: 110px 50px;
+  image-rendering: pixelated;
+  opacity: 1;
+  transition: opacity 0.2s;
+  animation: spritePlay 0.8s steps(2) infinite;
+}
+
+@keyframes spritePlay {
+  from { background-position: 0px; }
+  to   { background-position: -110px; }
+}
+
+/* ── Texto de hint dinámico ──────────────────────────── */
+.hoverText {
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  text-align: center;
+  font-family: var(--font);
+  font-size: 0.9rem;
+  color: var(--accent);
+  opacity: 1;
+  transition: opacity 0.3s 0.6s;
+  text-transform: uppercase;
+}
+
+/* Detecta dispositivos táctiles (Celulares) */
+.hoverText::before {
+  content: "[ Toca para ver ]";
+}
+
+/* Detecta dispositivos con puntero (Mouse) */
+@media (hover: hover) {
+  .hoverText::before {
+    content: "[ Pasa el mouse ]";
+  }
+}
+
+/* ── Hover: secuencia de aparición ───────────────────── */
+.imgWrapper:hover .sprite,
+.imgWrapper:hover .hoverText {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.imgWrapper:hover .imgPixel {
+  opacity: 1;
+  transition: opacity 0.3s 0.2s;
+}
+
+.imgWrapper:hover .imgReal {
+  opacity: 1;
+  transition: opacity 0.4s 0.4s;
+}
+
+/* ── Media queries ───────────────────────────────────── */
+@media (max-width: 767px) {
+  .text {
+    text-align: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .block {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .reverse {
+    flex-direction: row-reverse;
+  }
+
+  .text {
+    text-align: left;
+  }
+}

@@ -4,7 +4,7 @@ import VisitorCounter from '../VisitorCounter/VisitorCounter'
 
 const links = [
   { label: 'Sobre mí', href: '#sobre-mi' },
-  { label: 'Skills', href: '#skills' },
+  { label: 'Stack', href: '#skills' },
   { label: 'Proyectos', href: '#proyectos' },
   { label: 'Contacto', href: '#contacto' },
 ]
