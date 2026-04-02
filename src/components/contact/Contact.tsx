@@ -56,12 +56,14 @@ export default function Contact() {
           <div className={styles.social}>
 
             <div className={styles.introBlock}>
-              <p className={styles.intro}>
-                Contactame para hablar de un proyecto,<br />
-                una colaboración, o simplemente para decir hola.
-              </p>
+          <h3 className={styles.socialTitle}>&gt; TRABAJEMOS JUNTOS!</h3>
+          <p className={styles.intro}>
+            Contactame para hablar de un proyecto,<br />
+            una colaboración, o simplemente para decir hola.
+          </p>
+        </div>
               
-            </div>
+            
 
             <div className={styles.socialBlock}>
               <h3 className={styles.socialTitle}>Encontrame en</h3>
