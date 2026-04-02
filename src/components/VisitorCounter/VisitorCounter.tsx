@@ -1,26 +1,32 @@
 import { supabase } from '@/lib/supabase'
-import styles from '../footer/Footer.module.css'
+import styles from './VisitorCounter.module.css'
 
 export default async function VisitorCounter() {
-  //  Llamamos a la función RPC que creamos en el SQL Editor para sumar +1
-  // Esto se ejecuta en el servidor cada vez que alguien carga el Footer
+  let views = 0;
+
   try {
-    await supabase.rpc('increment_views', { row_label: 'total_views' })
+    // 1. Incrementamos el contador en la base de datos
+    // Solo lo hacemos si estamos en producción para no sumar tus propias visitas locales
+    if (process.env.NODE_ENV === 'production') {
+      await supabase.rpc('increment_views', { row_label: 'total_views' });
+    }
+
+    // 2. Traemos el valor actualizado
+    const { data } = await supabase
+      .from('site_stats')
+      .select('count')
+      .eq('label', 'total_views')
+      .maybeSingle();
+
+    if (data) {
+      views = data.count;
+    }
   } catch (error) {
-    console.error('Error incrementing views:', error)
+    console.error('Error en el contador de visitas:', error);
   }
 
-  // Traemos el dato actualizado de la tabla site_stats
-  const { data } = await supabase
-    .from('site_stats')
-    .select('count')
-    .eq('label', 'total_views')
-    .single()
-
-  const views = data?.count ?? 0
-  
-  // Formateamos el número a 6 dígitos (ej: 000042) para el estilo retro
-  const formattedViews = String(views).padStart(6, '0')
+  // 3. Formateamos a 6 dígitos (ej: 000042)
+  const formattedViews = String(views).padStart(6, '0');
 
   return (
     <div className={styles.counterWrapper}>
