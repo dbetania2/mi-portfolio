@@ -1,19 +1,20 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import styles from './Navbar.module.css'
 
 interface NavLink {
   label: string
   href: string
-  isRoute?: boolean // Nueva propiedad para identificar rutas fuera del home
+  isRoute?: boolean
 }
 
 const links: NavLink[] = [
-  { label: 'Sobre mí',  href: '#sobre-mi' },
-  { label: 'Skills',    href: '#skills' },
-  { label: 'Proyectos', href: '/projects', isRoute: true }, // Ahora apunta a la ruta
+  { label: 'Sobre mí',  href: '#about' },
+  { label: 'Stack',     href: '#skills' },
+  { label: 'Proyectos', href: '/projects', isRoute: true },
   { label: 'Contacto',  href: '#contacto' },
 ]
 
@@ -25,8 +26,6 @@ export default function Navbar() {
 
   const getHref = (link: NavLink): string => {
     if (link.isRoute) return link.href
-
-
     return isHome ? link.href : `/${link.href}`
   }
 
@@ -36,19 +35,15 @@ export default function Navbar() {
         setOpen(false)
       }
     }
-
     const handleResize = () => {
       if (window.innerWidth >= 768) {
         setOpen(false)
       }
     }
-
     if (open) {
       document.addEventListener('mousedown', handleClickOutside)
     }
-
     window.addEventListener('resize', handleResize)
-
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
       window.removeEventListener('resize', handleResize)
@@ -58,7 +53,13 @@ export default function Navbar() {
   return (
     <nav className={styles.nav} ref={navRef}>
       <Link href="/#hero" className={styles.logo} onClick={() => setOpen(false)}>
-        DG
+        <Image 
+          src="/DG.svg" 
+          alt="Logo DG" 
+          width={40} 
+          height={40} 
+          className={styles.logoSvg}
+        />
       </Link>
 
       <ul className={styles.links}>
