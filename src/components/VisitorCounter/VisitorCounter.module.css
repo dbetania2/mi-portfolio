@@ -8,7 +8,7 @@
 
 .counterText {
   color: var(--secondary); /* Usamos el color de las onomatopeyas */
-  font-family: var(--font); /* Tu fuente global pixelada */
+  font-family: var(--font); /* fuente global pixelada */
   font-size: 1.1rem;
   letter-spacing: 2px;
   text-transform: uppercase;
