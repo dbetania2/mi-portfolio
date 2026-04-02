@@ -1,145 +1,154 @@
-/* ── Sección ─────────────────────────────────────────── */
+/* --- SECCIÓN (Estilo Skills) --- */
 .section {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding: 5rem 1.5rem;
+  background-color: var(--bg);
 }
 
-/* ── Bloque texto + imagen ───────────────────────────── */
-.block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-  margin-bottom: 4rem;
+.header {
+  margin-bottom: 6rem;
+  text-align: left;
 }
 
-.block:last-child {
-  margin-bottom: 0;
-}
-
-/* ── Texto ───────────────────────────────────────────── */
-.text {
-  flex: 1;
-}
-
-.text p {
-  line-height: 2.2;
-}
-
-/* ── Imagen interactiva ──────────────────────────────── */
-.imgWrapper {
-  position: relative;
-  width: 280px;
-  height: 280px;
-  flex-shrink: 0;
-  overflow: hidden;
-  background: var(--bg);
-  border: 4px solid var(--border);
-  box-shadow: 4px 4px 0px var(--secondary);
-  cursor: url('/cursor/cursor-hand.png') 4 0, pointer;
-}
-
-.imgPixel,
-.imgReal {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-
-.imgPixel {
-  image-rendering: pixelated;
-}
-
-/* ── Sprite animado ──────────────────────────────────── */
-.sprite {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 2;
-  width: 55px;
-  height: 50px;
-  transform: translate(-50%, -60%) scale(4.5);
-  background-image: url('/sprites/pcyo.png');
-  background-repeat: no-repeat;
-  background-size: 110px 50px;
-  image-rendering: pixelated;
-  opacity: 1;
-  transition: opacity 0.2s;
-  animation: spritePlay 0.8s steps(2) infinite;
-}
-
-@keyframes spritePlay {
-  from { background-position: 0px; }
-  to   { background-position: -110px; }
-}
-
-/* ── Texto de hint dinámico ──────────────────────────── */
-.hoverText {
-  position: absolute;
-  bottom: 1rem;
-  left: 0;
-  width: 100%;
-  z-index: 2;
-  text-align: center;
-  font-family: var(--font);
-  font-size: 0.9rem;
+.sectionTitle {
   color: var(--accent);
-  opacity: 1;
-  transition: opacity 0.3s 0.6s;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
   text-transform: uppercase;
 }
 
-/* Detecta dispositivos táctiles (Celulares) */
-.hoverText::before {
-  content: "[ Toca para ver ]";
+.intro {
+  color: var(--accent);
+  line-height: 1.6;
 }
 
-/* Detecta dispositivos con puntero (Mouse) */
-@media (hover: hover) {
-  .hoverText::before {
-    content: "[ Pasa el mouse ]";
-  }
+/* --- BLOQUES --- */
+.row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rem; /* ESPACIO GRANDE: Empuja el bloque de texto hacia abajo en móvil */
+  margin-bottom: 12rem;
 }
 
-/* ── Hover: secuencia de aparición ───────────────────── */
-.imgWrapper:hover .sprite,
-.imgWrapper:hover .hoverText {
-  opacity: 0;
-  transition: opacity 0.2s;
+.row:last-child {
+  margin-bottom: 0;
 }
 
-.imgWrapper:hover .imgPixel {
-  opacity: 1;
-  transition: opacity 0.3s 0.2s;
+.visualCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  height: 250px; 
 }
 
-.imgWrapper:hover .imgReal {
-  opacity: 1;
-  transition: opacity 0.4s 0.4s;
+.textCol {
+  text-align: center;
+  flex: 1;
 }
 
-/* ── Media queries ───────────────────────────────────── */
-@media (max-width: 767px) {
-  .text {
-    text-align: center;
-  }
+.blockTitle {
+  color: var(--secondary);
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--primary);
+  display: inline-block;
+  padding-bottom: 0.3rem;
 }
 
-@media (min-width: 768px) {
-  .block {
+.description {
+  font-size: 1.1rem;
+  color: var(--accent);
+  line-height: 1.7;
+}
+
+/* --- FRASES (BEEP BOOP) --- */
+.quote {
+  color: var(--secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+
+  margin-top: 19rem; 
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* --- ANIMACIÓN DE SPRITES CON SCALE --- */
+.sprite {
+  background-repeat: no-repeat;
+  image-rendering: pixelated; /* Mantiene el pixel art nítido */
+  display: block;
+  position: absolute;
+  top: 0;
+  transform: scale(5);
+  transform-origin: top center;
+}
+
+/* Bob Ross: 164px / 4 frames = 41px */
+.bobRoss {
+  width: 41px;
+  height: 39px;
+  background-image: url('/sprites/bobross.png');
+  animation: playBob 0.8s steps(4) infinite;
+}
+
+/* PC Yo: 216px / 4 frames = 54px */
+.pcYo {
+  width: 54px;
+  height: 50px;
+  background-image: url('/sprites/pcyo.png');
+  animation: playPc 0.8s steps(4) infinite;
+}
+
+/* Yo Robot: 192px / 3 frames = 64px */
+.yoRobot {
+  width: 64px;
+  height: 47px;
+  background-image: url('/sprites/yorobot.png');
+  animation: playRobot 0.7s steps(3) infinite;
+}
+
+/* KEYFRAMES (background-position debe ser negativo y llegar al final del ancho) */
+@keyframes playBob { 
+  from { background-position: 0px 0px; } 
+  to { background-position: -164px 0px; } 
+}
+
+@keyframes playPc { 
+  from { background-position: 0px 0px; } 
+  to { background-position: -216px 0px; } 
+}
+
+@keyframes playRobot { 
+  from { background-position: 0px 0px; } 
+  to { background-position: -192px 0px; } 
+}
+
+/* --- DESKTOP --- */
+@media (min-width: 850px) {
+  .row {
     flex-direction: row;
-    align-items: flex-start;
+    text-align: left;
+    gap: 12rem;
   }
 
   .reverse {
     flex-direction: row-reverse;
   }
 
-  .text {
+  .textCol {
     text-align: left;
+  }
+  
+  .visualCol {
+    flex: 0.5;
   }
 }

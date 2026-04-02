@@ -1,72 +1,68 @@
 import styles from './About.module.css'
-import Image from 'next/image'
-
-function PhotoCard({ pixelSrc, realSrc, alt }: {
-  pixelSrc: string
-  realSrc: string
-  alt: string
-}) {
-  return (
-    <div className={styles.imgWrapper}>
-      <Image 
-        src={pixelSrc} 
-        alt={alt} 
-        fill 
-        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        className={styles.imgPixel} 
-      />
-      <Image 
-        src={realSrc} 
-        alt={alt} 
-        fill 
-        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        className={styles.imgReal} 
-      />
-      <div className={styles.sprite} />
-      <p className={styles.hoverText}></p> 
-    </div>
-  )
-}
 
 export default function About() {
   return (
-    <section id="sobre-mi" className={styles.section}>
+    <section id="about" className={styles.section}>
       <div className="container">
-        <h2 style={{ marginBottom: '3rem' }}>[ Sobre mí ]</h2>
+        
+        {/* CABECERA*/}
+        <header className={styles.header}>
+          <h2 className={styles.sectionTitle}>[ SOBRE MÍ ]</h2>
+          <p className={styles.intro}>
+            Hoy en día considero que un desarrollador <strong>full stack</strong> necesita conocimientos que van más allá de escribir código. 
+            Comprender cómo se diseñan, se conectan y se construyen los sistemas es fundamental para lograr soluciones 
+            completas, eficientes y mantenibles.
+            <br /><br />
+            Por eso, mi experiencia y mis intereses se desarrollan en <strong>tres áreas principales</strong>:
+          </p>
+        </header>
 
-        <div className={styles.block}>
-          <PhotoCard
-            pixelSrc="/images/yo2p.jpg"
-            realSrc="/images/yo2.jpeg"
-            alt="Daiana de pequeña"
-          />
-          <div className={styles.text}>
-            <p>Hola, soy Daiana, desarrolladora Full Stack.</p>
-            <br />
-            <p>
-Todo comenzó de pequeña, frente a mi primera computadora.             </p>
-          <p>Desde ese momento, la curiosidad por la tecnología pasó a formar parte de mi día a día y terminó convirtiéndose en el camino que hoy sigo como desarrolladora.</p>
+        {/* --- BLOQUES --- */}
+
+        <article className={styles.row}>
+          <div className={styles.visualCol}>
+            <div className={`${styles.sprite} ${styles.bobRoss}`} />
+            <p className={styles.quote}>"No cometemos errores, solo felices accidentes."</p>
           </div>
-        </div>
-
-        <div className={`${styles.block} ${styles.reverse}`}>
-          <PhotoCard
-            pixelSrc="/images/yo3p.jpg"
-            realSrc="/images/yo3.jpeg"
-            alt="Daiana frente a la computadora"
-          />
-          <div className={styles.text}>
-            <p>Siempre sentí que tenía dos formas de ver el mundo.</p>
-            <br />
-            <p>Por un lado, mi lado artístico me impulsa a imaginar, diseñar y dar vida a ideas con una mirada estética y creativa.</p>
-            <p>Por otro, mi lado lógico me lleva a buscar estructura, orden y soluciones dentro de la complejidad.</p>
-            <br />
+          <div className={styles.textCol}>
+            <h3 className={styles.blockTitle}> Diseño</h3>
             <p>
-              Hoy, esa combinación guía mi trabajo.Desarrollo aplicaciones funcionales, claras e intuitivas.
-              Aquella niña curiosa creció, y hoy transforma esa misma fascinación por la tecnología en cada proyecto que diseña y construye.
+              El diseño es una etapa donde puedo demostrar mi lado creativo y uno de mis procesos favoritos dentro del desarrollo. 
+              Suelo comenzar creando paneles de paletas de colores, iconos, wireframes y prototipos para definir la identidad 
+              y la estructura visual de las aplicaciones. Además, el <strong>pixelart</strong> es mi estilo de diseño preferido.
             </p>
           </div>
-        </div>
+        </article>
+
+        <article className={`${styles.row} ${styles.reverse}`}>
+          <div className={styles.visualCol}>
+            <div className={`${styles.sprite} ${styles.pcYo}`} />
+            <p className={styles.quote}>*tap* *tap*</p>
+          </div>
+          <div className={styles.textCol}>
+            <h3 className={styles.blockTitle}>Programación</h3>
+            <p>
+              La programación es una de mis áreas técnicas más fuertes. Cuento con estudios universitarios en programación 
+              y trabajo tanto en <strong>frontend como en backend</strong>. También utilizo herramientas no-code cuando permiten 
+              resolver problemas de forma más ágil.
+            </p>
+          </div>
+        </article>
+
+        <article className={styles.row}>
+          <div className={styles.visualCol}>
+            <div className={`${styles.sprite} ${styles.yoRobot}`} />
+            <p className={styles.quote}>"beep boop beep"</p>
+          </div>
+          <div className={styles.textCol}>
+            <h3 className={styles.blockTitle}>Automatización</h3>
+            <p>
+              El uso de <strong>agentes de inteligencia artificial</strong> y la automatización de procesos permite optimizar tareas repetitivas 
+              y mejorar la eficiencia en el trabajo diario, tanto al programar como al gestionar proyectos.
+            </p>
+          </div>
+        </article>
+
       </div>
     </section>
   )
