@@ -89,6 +89,71 @@
   object-fit: contain !important;
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(8, 5, 17, 0.98); /* Color var(--bg) casi opaco */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  cursor: zoom-out;
+  padding: 1rem;
+  overflow: auto; 
+}
+
+.lightbox {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  height: 80vh;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: zoom-in;
+}
+
+/* --- ESTADO DE ZOOM --- */
+.lightbox.zoomed {
+  max-width: none;
+  width: 150vw; /* La imagen se hace más grande que el viewport */
+  height: 150vh;
+  cursor: zoom-out;
+  margin: auto;
+}
+
+.lightboxImg {
+  object-fit: contain !important;
+  image-rendering: pixelated; 
+}
+
+.closeBtn {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: var(--bg);
+  color: var(--accent);
+  border: 2px solid var(--border);
+  font-family: var(--font);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  z-index: 10000;
+  text-transform: uppercase;
+}
+
+/* Ajustes para móviles */
 @media (max-width: 767px) {
+  .lightbox {
+    height: 60vh;
+  }
+  .lightbox.zoomed {
+    width: 250vw; /* Más zoom en móviles */
+    height: 250vh;
+  }
+  .closeBtn {
+    top: 1rem;
+    right: 1rem;
+  }
   .imgWrapper { aspect-ratio: 4 / 3; }
 }

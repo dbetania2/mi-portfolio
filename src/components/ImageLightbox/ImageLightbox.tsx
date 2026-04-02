@@ -12,16 +12,21 @@ type Props = {
 
 export default function ImageLightbox({ src, alt, priority = false }: Props) {
   const [open, setOpen] = useState(false)
+  const [isZoomed, setIsZoomed] = useState(false) // Nuevo estado para el zoom interno
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false)
+      if (e.key === 'Escape') {
+        setOpen(false)
+        setIsZoomed(false)
+      }
     }
     if (open) {
       document.body.style.overflow = 'hidden'
       document.addEventListener('keydown', handleKey)
     } else {
       document.body.style.overflow = 'unset'
+      setIsZoomed(false)
     }
     return () => {
       document.body.style.overflow = 'unset'
@@ -51,19 +56,29 @@ export default function ImageLightbox({ src, alt, priority = false }: Props) {
       {open && (
         <div
           className={styles.overlay}
-          onClick={() => setOpen(false)}
+          onClick={() => {
+            setOpen(false)
+            setIsZoomed(false)
+          }}
           role="dialog"
           aria-modal="true"
         >
           <button className={styles.closeBtn} onClick={() => setOpen(false)}>
             [ X ] Cerrar
           </button>
-          <div className={styles.lightbox} onClick={(e) => e.stopPropagation()}>
+          
+          <div 
+            className={`${styles.lightbox} ${isZoomed ? styles.zoomed : ''}`} 
+            onClick={(e) => {
+              e.stopPropagation()
+              setIsZoomed(!isZoomed) // Cambia entre zoom y vista normal
+            }}
+          >
             <Image
               src={src}
               alt={alt}
               fill
-              sizes="95vw"
+              sizes="100vw"
               className={styles.lightboxImg}
               priority
             />
