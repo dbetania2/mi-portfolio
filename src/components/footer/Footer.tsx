@@ -10,9 +10,9 @@ const links = [
 ]
 
 const socials = [
-  { name: 'LinkedIn', icon: '/icons/linkedin.png', url: 'https://linkedin.com/in/tu-usuario' },
-  { name: 'GitHub', icon: '/icons/github.png', url: 'https://github.com/tu-usuario' },
-  { name: 'Instagram', icon: '/icons/instagram.png', url: 'https://instagram.com/tu-usuario' },
+  { name: 'LinkedIn', icon: '/icons/linkedin.png', url: 'https://linkedin.com/in/daianadelgrecco/' },
+  { name: 'GitHub', icon: '/icons/github.png', url: 'https://github.com/dbetania2' },
+  { name: 'Instagram', icon: '/icons/instagram.png', url: 'https://instagram.com/daianabetania' },
 ]
 
 export default async function Footer() {
