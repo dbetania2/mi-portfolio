@@ -26,33 +26,14 @@
   align-items: center;
 }
 
-
-
-.greeting {
-  color: var(--secondary); /* Rosa */
-  margin-bottom: 0.5rem;
-}
-
-.role {
-  color: var(--secondary); /* Rosa */
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.description {
-  color: var(--accent); 
-  font-size: 1.5rem;    
-  max-width: 35rem;     
-  margin-bottom: 2.5rem;
-  line-height: 1.8;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-
+/* --- TÍTULO Y NOMBRE (MÓVIL PRIMERO) --- */
 .nameContainer {
   display: block;
   margin-bottom: 0.5rem;
+  /* Permitimos que salte de línea para que no desborde el celular */
+  white-space: normal; 
+  /* Evitamos que las letras se separen individualmente */
+  word-break: keep-all; 
 }
 
 .letter {
@@ -61,11 +42,38 @@
   transition: color 0.2s ease, transform 0.2s ease;
   white-space: pre;
   cursor: default;
+  
+  /* TAMAÑO FLUIDO: 
+     2.2rem en celulares pequeños, escala con el ancho, máximo 4.5rem */
+  font-size: clamp(2.2rem, 10vw, 4.5rem);
+  line-height: 1.1;
 }
 
 .letter:hover {
   color: var(--secondary) !important; 
   transform: translateY(-5px);
+}
+
+.greeting {
+  color: var(--secondary);
+  margin-bottom: 0.5rem;
+}
+
+.role {
+  color: var(--secondary);
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: clamp(1.5rem, 5vw, 2.5rem); /* También fluido */
+}
+
+.description {
+  color: var(--accent); 
+  font-size: clamp(1.1rem, 4vw, 1.5rem); /* Fluido */
+  max-width: 35rem;     
+  margin-bottom: 2.5rem;
+  line-height: 1.8;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ── 3. Botones y Sprite ── */
@@ -130,6 +138,8 @@
 
   .nameContainer {
     text-align: left;
+    /* En PC forzamos que sea una sola línea */
+    white-space: nowrap; 
   }
 
   .buttons {
