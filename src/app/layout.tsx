@@ -3,8 +3,10 @@ import './globals.css'
 import Navbar from '@/components/navbar/Navbar'
 import Footer from '@/components/footer/Footer'
 import ChatBot from '@/components/chat/ChatBot'
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://daianadg-portfolio.vercel.app"),
   title: 'Daiana Del Grecco | Desarrolladora Full Stack & Automatización',
   description:
     'Portfolio con proyectos de desarrollo web Full Stack, automatización de procesos y diseño de interfaces.',
@@ -60,6 +62,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <ChatBot />
+        <Analytics />
       </body>
     </html>
   )
