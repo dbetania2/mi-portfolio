@@ -1,11 +1,16 @@
 .section {
-  min-height: 100vh;
+  min-height: auto;
+  height: auto;
+
   display: flex;
   align-items: center;
-  padding-top: 5rem;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+
+  padding: 6rem 1.25rem 6rem 1.25rem;
+
   overflow: hidden;
+
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .layout {
@@ -13,9 +18,11 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+
   width: 100%;
   max-width: 72rem;
   margin: 0 auto;
+
   gap: 2rem;
 }
 
@@ -26,31 +33,29 @@
   align-items: center;
 }
 
-/* --- TÍTULO Y NOMBRE (MÓVIL PRIMERO) --- */
+/* ── NOMBRE ── */
 .nameContainer {
   display: block;
   margin-bottom: 0.5rem;
-  /* Permitimos que salte de línea para que no desborde el celular */
-  white-space: normal; 
-  /* Evitamos que las letras se separen individualmente */
-  word-break: keep-all; 
+
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: normal;
 }
 
 .letter {
   display: inline-block;
-  color: var(--accent); 
+  color: var(--accent);
   transition: color 0.2s ease, transform 0.2s ease;
   white-space: pre;
   cursor: default;
-  
-  /* TAMAÑO FLUIDO: 
-     2.2rem en celulares pequeños, escala con el ancho, máximo 4.5rem */
-  font-size: clamp(2.2rem, 10vw, 4.5rem);
+
+  font-size: clamp(2rem, 8vw, 4.5rem);
   line-height: 1.1;
 }
 
 .letter:hover {
-  color: var(--secondary) !important; 
+  color: var(--secondary) !important;
   transform: translateY(-5px);
 }
 
@@ -63,20 +68,24 @@
   color: var(--secondary);
   margin-top: 0.5rem;
   margin-bottom: 1rem;
-  font-size: clamp(1.5rem, 5vw, 2.5rem); /* También fluido */
+
+  font-size: clamp(1.4rem, 4.5vw, 2.5rem);
 }
 
 .description {
-  color: var(--accent); 
-  font-size: clamp(1.1rem, 4vw, 1.5rem); /* Fluido */
-  max-width: 35rem;     
+  color: var(--accent);
+
+  font-size: clamp(1.1rem, 3.8vw, 1.5rem);
+
+  max-width: 35rem;
   margin-bottom: 2.5rem;
-  line-height: 1.8;
+  line-height: 1.7;
+
   margin-left: auto;
   margin-right: auto;
 }
 
-/* ── 3. Botones y Sprite ── */
+/* ── BOTONES ── */
 .buttons {
   display: flex;
   gap: 1rem;
@@ -84,21 +93,26 @@
   justify-content: center;
 }
 
+/* ── SPRITE (INTACTO) ── */
 .spriteContainer {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+
   width: 220px;
   height: 220px;
   flex-shrink: 0;
+
   background-image: url('/sprites/fondochibi.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+
   image-rendering: pixelated;
 }
 
+/* NO TOCADO */
 .chibiScaled {
   position: relative;
   z-index: 1;
@@ -106,17 +120,19 @@
   image-rendering: pixelated;
 }
 
-/* ── 4. Responsive ── */
+/* ── TABLET ── */
 @media (min-width: 768px) {
   .spriteContainer {
     width: 380px;
     height: 380px;
   }
+
   .chibiScaled {
     transform: scale(5);
   }
 }
 
+/* ── DESKTOP ── */
 @media (min-width: 1024px) {
   .layout {
     flex-direction: row;
@@ -138,8 +154,7 @@
 
   .nameContainer {
     text-align: left;
-    /* En PC forzamos que sea una sola línea */
-    white-space: nowrap; 
+    white-space: nowrap;
   }
 
   .buttons {
@@ -148,6 +163,7 @@
 
   .spriteContainer {
     flex: 0 0 auto;
+
     width: 650px;
     height: 650px;
   }
