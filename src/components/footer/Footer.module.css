@@ -12,14 +12,15 @@
   gap: 3rem;
 }
 
-/* ── Sección Superior (Marca, Nav, Redes) ── */
+/* ── SECCIÓN SUPERIOR ── */
 .top {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  gap: 2rem;
+  gap: 3rem;
   align-items: start;
 }
 
+/* ── BRAND ── */
 .brand {
   display: flex;
   flex-direction: column;
@@ -27,59 +28,64 @@
 }
 
 .logo {
-  font-size: 2.5rem;
-  color: var(--secondary);
-  font-weight: bold;
-  text-shadow: 3px 3px 0px var(--primary);
+  width: 42px;
+  height: 42px;
+  image-rendering: pixelated;
 }
 
 .tagline {
   font-size: 1.1rem;
-  max-width: 300px;
+  max-width: 320px;
   color: var(--accent);
   opacity: 0.9;
+  line-height: 1.6;
 }
 
-/* ── Listas de Navegación y Redes ── */
-.nav, .socials {
+/* ── NAV Y SOCIALS ── */
+.nav,
+.socials {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
-.navTitle, .socialsTitle {
+.navTitle,
+.socialsTitle {
   font-size: 1.25rem;
   color: var(--primary);
   margin-bottom: 0.5rem;
   text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.navLink, .socialLink {
+.navLink,
+.socialLink {
   color: var(--accent);
   text-decoration: none;
   font-size: 1.1rem;
-  transition: transform 0.1s;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+
+  transition: transform 0.15s ease, color 0.15s ease;
 }
 
-.navLink:hover, .socialLink:hover {
+.navLink:hover,
+.socialLink:hover {
   color: var(--secondary);
-  transform: translateX(5px);
+  transform: translateX(6px);
 }
 
 .socialIcon {
   image-rendering: pixelated;
 }
 
-/* ── SECCIÓN DEL CONTADOR (NUEVA) ── */
+/* ── CONTADOR ── */
 .counterWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 2rem 0;
-  /* Efecto de línea punteada retro */
   border-top: 2px dotted var(--primary);
   border-bottom: 2px dotted var(--primary);
   margin: 1rem 0;
@@ -91,12 +97,12 @@
   font-size: 1.5rem;
   letter-spacing: 4px;
   text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
-  background: rgba(113, 24, 60, 0.1); /* Un toque de tu color primary de fondo */
+  background: rgba(113, 24, 60, 0.1);
   padding: 0.5rem 1.5rem;
   border: 2px solid rgba(211, 26, 100, 0.2);
 }
 
-/* ── Sección Inferior (Copyright) ── */
+/* ── BOTTOM ── */
 .bottom {
   display: flex;
   justify-content: space-between;
@@ -107,14 +113,17 @@
   padding-top: 1rem;
 }
 
-/* ── Responsive ── */
+/* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .top {
     grid-template-columns: 1fr;
     text-align: center;
+    gap: 2.5rem;
   }
 
-  .brand, .nav, .socials {
+  .brand,
+  .nav,
+  .socials {
     align-items: center;
   }
 

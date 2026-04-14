@@ -3,7 +3,7 @@ import Image from 'next/image'
 import VisitorCounter from '../VisitorCounter/VisitorCounter'
 
 const links = [
-  { label: 'Sobre mí', href: '#sobre-mi' },
+  { label: 'Sobre mí', href: '#about' },
   { label: 'Stack', href: '#skills' },
   { label: 'Proyectos', href: '#proyectos' },
   { label: 'Contacto', href: '#contacto' },
@@ -15,7 +15,7 @@ const socials = [
   { name: 'Instagram', icon: '/icons/instagram.png', url: 'https://instagram.com/daianabetania' },
 ]
 
-export default async function Footer() {
+export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
@@ -23,13 +23,23 @@ export default async function Footer() {
       <div className={`container ${styles.container}`}>
 
         <div className={styles.top}>
-          {/* Brand */}
+
+          {/* BRAND */}
           <div className={styles.brand}>
-            <span className={styles.logo}>DG</span>
-            <p className={styles.tagline}>Creando, diseñando y construyendo en internet.</p>
+            <Image
+              src="/DG.svg"
+              alt="DG Logo"
+              width={42}
+              height={42}
+              className={styles.logo}
+            />
+
+            <p className={styles.tagline}>
+              Desarrollo web, automatización de procesos y diseño de interfaces.
+            </p>
           </div>
 
-          {/* Nav */}
+          {/* NAV */}
           <div className={styles.nav}>
             <p className={styles.navTitle}>Navegación</p>
             {links.map((link) => (
@@ -39,7 +49,7 @@ export default async function Footer() {
             ))}
           </div>
 
-          {/* Socials */}
+          {/* SOCIALS */}
           <div className={styles.socials}>
             <p className={styles.socialsTitle}>Redes</p>
             {socials.map((s) => (
@@ -49,12 +59,13 @@ export default async function Footer() {
               </a>
             ))}
           </div>
+
         </div>
 
-        {/* CONTADOR 👇 */}
+        {/* CONTADOR */}
         <VisitorCounter />
 
-        {/* Bottom */}
+        {/* BOTTOM */}
         <div className={styles.bottom}>
           <span>© {year} Daiana Del Grecco. Todos los derechos reservados.</span>
           <span>Hecho con mucho amor.</span>
