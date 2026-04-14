@@ -1,0 +1,175 @@
+/* --- 1. CONTENEDOR Y DISPARADOR --- */
+.wrapper {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 9999;
+  font-family: var(--font);
+}
+
+.launcher {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s;
+}
+
+.launcher:active {
+  transform: translateY(2px);
+}
+
+.robotImage {
+  width: 75px;
+  height: 75px;
+  filter: drop-shadow(4px 4px 0px var(--primary));
+}
+
+/* --- 2. VENTANA PRINCIPAL --- */
+.window {
+  position: absolute;
+  bottom: 90px;
+  right: 0;
+  width: 350px;
+  height: 500px;
+  background: var(--bg);
+  border: 4px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 8px 8px 0px rgba(0,0,0,0.6);
+  overflow: hidden;
+}
+
+/* --- 3. ENCABEZADO (BOTÓN DE CIERRE) --- */
+.header {
+  background: var(--primary);
+  color: var(--accent);
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 4px solid var(--border);
+  cursor: pointer; /* Indica que se puede cerrar */
+  user-select: none;
+}
+
+.headerTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.closeX {
+  font-size: 18px;
+  font-weight: bold;
+  opacity: 0.8;
+}
+
+.blink {
+  color: var(--secondary);
+  animation: blinker 1s linear infinite;
+  font-size: 14px;
+}
+
+@keyframes blinker { 50% { opacity: 0; } }
+
+/* --- 4. HISTORIAL DE MENSAJES --- */
+.history {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%),
+              var(--bg);
+  background-size: 100% 4px;
+}
+
+.message {
+  max-width: 85%;
+  padding: 10px;
+  border: 2px solid;
+  font-size: 19px;
+  line-height: 1.1;
+}
+
+.user {
+  align-self: flex-end;
+  background: var(--secondary);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.bot {
+  align-self: flex-start;
+  background: var(--btn-bg);
+  border-color: var(--primary);
+  color: var(--accent);
+}
+
+.loading {
+  color: var(--secondary);
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+/* --- 5. ENTRADA DE TEXTO --- */
+.footer {
+  padding: 12px;
+  background: var(--bg);
+  display: flex;
+  gap: 8px;
+  border-top: 4px solid var(--border);
+}
+
+.input {
+  flex: 1;
+  background: var(--btn-bg);
+  border: 2px solid var(--primary);
+  color: var(--accent);
+  padding: 8px;
+  font-family: var(--font);
+  font-size: 18px;
+  outline: none;
+}
+
+.sendBtn {
+  background: var(--secondary);
+  color: var(--accent);
+  border: none;
+  padding: 0 15px;
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* --- 6. MODO MOBILE (PANTALLA COMPLETA) --- */
+@media (max-width: 600px) {
+  .window {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    box-shadow: none;
+    z-index: 10001;
+  }
+
+  .header {
+    height: 65px; /* Más grande para el pulgar */
+    padding: 0 20px;
+    border-top: 4px solid var(--border);
+  }
+
+  .footer {
+    padding-bottom: env(safe-area-inset-bottom, 20px);
+  }
+}
