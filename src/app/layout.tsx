@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Navbar from '@/components/navbar/Navbar'
 import Footer from '@/components/footer/Footer'
-import ChatBot from '@/components/Chat/ChatBot'
+import ChatBot from '@/components/chat/ChatBot'
 
 export const metadata: Metadata = {
   title: 'Daiana Del Grecco | Desarrolladora Full Stack & Automatización',
