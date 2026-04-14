@@ -28,7 +28,7 @@ export default async function Skills() {
     <section id="skills" className={styles.section}>
       <div className="container">
         <h2>[ Stack ]</h2>
-        <p style={{ color: 'var(--secondary)', marginBottom: '2rem' }}>
+        <p style={{ color: 'var(--accent)', marginBottom: '2rem' }}>
           Puntuación basada en proyectos realizados.
         </p>
         <div className={styles.grid}>
@@ -42,7 +42,9 @@ export default async function Skills() {
                     {/* Componente reutilizable con tamaño grande para Skills */}
                     <TechIcon name={name} size="large" />
 
-                    <span className={styles.name}>{name}</span>
+                    <span className={styles.name} title={name}>
+                      {name === 'Google App Script' ? 'GAS' : name}
+                    </span>
                     <span className={styles.dots} />
                     <span className={styles.count}>x{count}</span>
                   </div>

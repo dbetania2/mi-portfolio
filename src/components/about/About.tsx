@@ -5,7 +5,6 @@ export default function About() {
     <section id="about" className={styles.section}>
       <div className="container">
 
-        {/* CABECERA */}
         <header className={styles.header}>
           <h2 className={styles.sectionTitle}>[ SOBRE MÍ ]</h2>
 
@@ -18,7 +17,6 @@ export default function About() {
           </p>
         </header>
 
-        {/* DISEÑO */}
         <article className={styles.row}>
           <div className={styles.visualCol}>
             <div className={`${styles.sprite} ${styles.bobRoss}`} />
@@ -38,7 +36,6 @@ export default function About() {
           </div>
         </article>
 
-        {/* PROGRAMACIÓN */}
         <article className={`${styles.row} ${styles.reverse}`}>
           <div className={styles.visualCol}>
             <div className={`${styles.sprite} ${styles.pcYo}`} />
@@ -55,7 +52,6 @@ export default function About() {
           </div>
         </article>
 
-        {/* AUTOMATIZACIÓN */}
         <article className={styles.row}>
           <div className={styles.visualCol}>
             <div className={`${styles.sprite} ${styles.yoRobot}`} />
