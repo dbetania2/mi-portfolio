@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Navbar from '@/components/navbar/Navbar'
 import Footer from '@/components/footer/Footer'
+import ChatBot from '@/components/Chat/ChatBot'
 
 export const metadata: Metadata = {
   title: 'Daiana Del Grecco | Desarrolladora Full Stack & Automatización',
@@ -58,6 +59,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <ChatBot />
       </body>
     </html>
   )
