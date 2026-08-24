@@ -1,5 +1,6 @@
 import styles from './MyStory.module.css'
 import Image from 'next/image'
+import Link from 'next/link'
 
 function PhotoCard({ pixelSrc, realSrc, alt }: {
   pixelSrc: string
@@ -22,8 +23,6 @@ function PhotoCard({ pixelSrc, realSrc, alt }: {
         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
         className={styles.imgReal} 
       />
-      <div className={styles.sprite} />
-      <p className={styles.hoverText}></p> 
     </div>
   )
 }
@@ -32,6 +31,9 @@ export default function About() {
   return (
     <section id="sobre-mi" className={styles.section}>
       <div className="container">
+        <Link href="/" className={styles.back}>
+          &lt; Volver al inicio
+        </Link>
         <h2 style={{ marginBottom: '3rem' }}>[ Sobre mí ]</h2>
 
         <div className={styles.block}>
@@ -43,9 +45,8 @@ export default function About() {
           <div className={styles.text}>
             <p>Hola, soy Daiana, desarrolladora Full Stack.</p>
             <br />
-            <p>
-                Todo comenzó de pequeña, frente a mi primera computadora.             </p>
-          <p>Desde ese momento, la curiosidad por la tecnología pasó a formar parte de mi día a día y terminó convirtiéndose en el camino que hoy sigo como desarrolladora.</p>
+            <p>Todo comenzó de pequeña, frente a mi primera computadora.</p>
+            <p>Desde ese momento, la curiosidad por la tecnología pasó a formar parte de mi día a día y terminó convirtiéndose en el camino que hoy sigo como desarrolladora.</p>
           </div>
         </div>
 
@@ -62,7 +63,7 @@ export default function About() {
             <p>Por otro, mi lado lógico me lleva a buscar estructura, orden y soluciones dentro de la complejidad.</p>
             <br />
             <p>
-              Hoy, esa combinación guía mi trabajo.Desarrollo aplicaciones funcionales, claras e intuitivas.
+              Hoy, esa combinación guía mi trabajo. Desarrollo aplicaciones funcionales, claras e intuitivas.
               Aquella niña curiosa creció, y hoy transforma esa misma fascinación por la tecnología en cada proyecto que diseña y construye.
             </p>
           </div>

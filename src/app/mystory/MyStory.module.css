@@ -1,7 +1,8 @@
 /* ── Sección ─────────────────────────────────────────── */
 .section {
-  padding-top: 3rem;
+  padding-top: 6.5rem;
   padding-bottom: 3rem;
+  min-height: 100vh;
 }
 
 /* ── Bloque texto + imagen ───────────────────────────── */
@@ -36,7 +37,7 @@
   background: var(--bg);
   border: 4px solid var(--border);
   box-shadow: 4px 4px 0px var(--secondary);
-  cursor: url('/cursor/cursor-hand.png') 4 0, pointer;
+  cursor: url('/cursor/mano.png') 12 0, pointer;
 }
 
 .imgPixel,
@@ -46,80 +47,23 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0;
   transition: opacity 0.4s;
 }
 
 .imgPixel {
   image-rendering: pixelated;
-}
-
-/* ── Sprite animado ──────────────────────────────────── */
-.sprite {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 2;
-  width: 55px;
-  height: 50px;
-  transform: translate(-50%, -60%) scale(4.5);
-  background-image: url('/sprites/pcyo.png');
-  background-repeat: no-repeat;
-  background-size: 110px 50px;
-  image-rendering: pixelated;
   opacity: 1;
-  transition: opacity 0.2s;
-  animation: spritePlay 0.8s steps(2) infinite;
+  z-index: 1;
 }
 
-@keyframes spritePlay {
-  from { background-position: 0px; }
-  to   { background-position: -110px; }
-}
-
-/* ── Texto de hint dinámico ──────────────────────────── */
-.hoverText {
-  position: absolute;
-  bottom: 1rem;
-  left: 0;
-  width: 100%;
-  z-index: 2;
-  text-align: center;
-  font-family: var(--font);
-  font-size: 0.9rem;
-  color: var(--accent);
-  opacity: 1;
-  transition: opacity 0.3s 0.6s;
-  text-transform: uppercase;
-}
-
-/* Detecta dispositivos táctiles (Celulares) */
-.hoverText::before {
-  content: "[ Toca para ver ]";
-}
-
-/* Detecta dispositivos con puntero (Mouse) */
-@media (hover: hover) {
-  .hoverText::before {
-    content: "[ Pasa el mouse ]";
-  }
-}
-
-/* ── Hover: secuencia de aparición ───────────────────── */
-.imgWrapper:hover .sprite,
-.imgWrapper:hover .hoverText {
+.imgReal {
   opacity: 0;
-  transition: opacity 0.2s;
+  z-index: 2;
 }
 
-.imgWrapper:hover .imgPixel {
-  opacity: 1;
-  transition: opacity 0.3s 0.2s;
-}
-
+/* ── Hover: revelar imagen real ──────────────────────── */
 .imgWrapper:hover .imgReal {
   opacity: 1;
-  transition: opacity 0.4s 0.4s;
 }
 
 /* ── Media queries ───────────────────────────────────── */
@@ -142,4 +86,19 @@
   .text {
     text-align: left;
   }
+}
+
+.back {
+  display: inline-block;
+  color: var(--secondary);
+  margin-bottom: 2rem;
+  text-decoration: none;
+  font-family: var(--font);
+  transition: color 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+
+.back:hover {
+  color: var(--accent);
+  transform: translateX(-5px);
 }

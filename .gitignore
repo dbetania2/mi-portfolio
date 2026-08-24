@@ -9,7 +9,6 @@ env.local
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
-src/app/mystory
 # testing
 /coverage
 
@@ -39,3 +38,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Seccion mi historia
+/src/app/mystory
