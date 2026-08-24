@@ -137,3 +137,14 @@
     text-align: center;
   }
 }
+
+.scrambleName {
+  color: var(--secondary);
+  cursor: pointer;
+  transition: color 0.15s ease;
+  font-weight: bold;
+}
+
+.scrambleName:hover {
+  color: var(--accent);
+}

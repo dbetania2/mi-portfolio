@@ -77,6 +77,15 @@
   animation: float 3s ease-in-out infinite;
 }
 
+.author {
+  display: block;
+  font-style: italic;
+  text-transform: none; /* Keep original capitalization (mixed case) to stand out */
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }

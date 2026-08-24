@@ -21,6 +21,47 @@
   image-rendering: pixelated;
 }
 
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.themeToggle {
+  background: var(--btn-bg);
+  border: 4px solid var(--border);
+  width: 44px;
+  height: 24px;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 4px 4px 0px var(--secondary);
+  display: flex;
+  align-items: center;
+  padding: 0;
+  outline: none;
+  transition: transform 0.05s;
+}
+
+.themeToggle:active {
+  box-shadow: 2px 2px 0px var(--secondary);
+  transform: translate(2px, 2px);
+}
+
+.toggleThumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: left 0.12s steps(4);
+}
+
+.themeToggleActive .toggleThumb {
+  left: 22px;
+}
+
 .links {
   display: flex;
   gap: 1.5rem;

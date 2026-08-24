@@ -12,14 +12,16 @@ interface NavLink {
 }
 
 const links: NavLink[] = [
-  { label: 'Sobre mí',  href: '#about' },
-  { label: 'Stack',     href: '#skills' },
-  { label: 'Proyectos', href: '/projects', isRoute: true },
-  { label: 'Contacto',  href: '#contacto' },
+  { label: 'Sobre mí',    href: '#about' },
+  // { label: 'Mi historia',  href: '/mystory', isRoute: true },
+  { label: 'Stack',       href: '#skills' },
+  { label: 'Proyectos',   href: '/projects', isRoute: true },
+  { label: 'Contacto',    href: '#contacto' },
 ]
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
   const pathname = usePathname()
   const navRef = useRef<HTMLDivElement>(null)
   const isHome = pathname === '/'
@@ -27,6 +29,18 @@ export default function Navbar() {
   const getHref = (link: NavLink): string => {
     if (link.isRoute) return link.href
     return isHome ? link.href : `/${link.href}`
+  }
+
+  useEffect(() => {
+    const currentTheme = (document.documentElement.getAttribute('data-theme') || 'dark') as 'dark' | 'light'
+    setTheme(currentTheme)
+  }, [])
+
+  const toggleTheme = () => {
+    const nextTheme = theme === 'dark' ? 'light' : 'dark'
+    setTheme(nextTheme)
+    document.documentElement.setAttribute('data-theme', nextTheme)
+    localStorage.setItem('theme', nextTheme)
   }
 
   useEffect(() => {
@@ -62,21 +76,31 @@ export default function Navbar() {
         />
       </Link>
 
-      <ul className={styles.links}>
-        {links.map((link) => (
-          <li key={link.href}>
-            <Link href={getHref(link)}>{link.label}</Link>
-          </li>
-        ))}
-      </ul>
+      <div className={styles.rightSection}>
+        <ul className={styles.links}>
+          {links.map((link) => (
+            <li key={link.href}>
+              <Link href={getHref(link)}>{link.label}</Link>
+            </li>
+          ))}
+        </ul>
 
-      <button 
-        className={styles.hamburger} 
-        onClick={() => setOpen(!open)}
-        aria-expanded={open}
-      >
-        {open ? '[ cerrar ]' : '[ menú ]'}
-      </button>
+        <button 
+          onClick={toggleTheme} 
+          className={`${styles.themeToggle} ${theme === 'light' ? styles.themeToggleActive : ''}`} 
+          aria-label="Cambiar tema"
+        >
+          <div className={styles.toggleThumb} />
+        </button>
+
+        <button 
+          className={styles.hamburger} 
+          onClick={() => setOpen(!open)}
+          aria-expanded={open}
+        >
+          {open ? '[ cerrar ]' : '[ menú ]'}
+        </button>
+      </div>
 
       {open && (
         <ul className={styles.mobileMenu}>

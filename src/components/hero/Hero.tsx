@@ -1,7 +1,16 @@
+'use client'
+import { useState } from 'react'
 import styles from './Hero.module.css'
+import ScrambleText from '../ScrambleText/ScrambleText'
 
 export default function Hero() {
   const name = "Daiana Del Grecco";
+  const [isDone, setIsDone] = useState(false);
+  const [hasAnimatedOnce, setHasAnimatedOnce] = useState(false);
+
+  const isFloating = isDone || hasAnimatedOnce;
+  const isPointerVisible = isDone || hasAnimatedOnce;
+  const isSmallPointerVisible = !isDone && !hasAnimatedOnce;
 
   return (
     <section id="hero" className={styles.section}>
@@ -14,15 +23,21 @@ export default function Hero() {
         <div className={styles.text}>
           
           <p className={styles.greeting}>
-            &gt; Hola, soy
+            <span className={`${styles.smallPointer} ${isSmallPointerVisible ? styles.pointerVisible : ''}`}>▶&nbsp;</span>
+            Hola, soy
           </p>
           
-          <h1 className={styles.nameContainer}>
-            {name.split("").map((letter, index) => (
-              <span key={index} className={styles.letter}>
-                {letter === " " ? "\u00A0" : letter}
-              </span>
-            ))}
+          <h1 className={`${styles.nameContainer} ${isFloating ? styles.floating : ''}`}>
+            <span className={`${styles.pointer} ${isPointerVisible ? styles.pointerVisible : ''}`}>▶&nbsp;</span>
+            <ScrambleText 
+              text={name} 
+              className={styles.nameText} 
+              onStart={() => setIsDone(false)}
+              onComplete={() => {
+                setIsDone(true);
+                setHasAnimatedOnce(true);
+              }}
+            />
           </h1>
 
           <h2 className={styles.role}>

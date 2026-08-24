@@ -41,7 +41,7 @@
   background: var(--primary);
   color: var(--accent);
   font-family: var(--font);
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   padding: 0.4rem 0.8rem;
   z-index: 3;
   border: 2px solid var(--accent);
@@ -95,7 +95,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(8, 5, 17, 0.98); /* Color var(--bg) casi opaco */
+  background: rgba(8, 5, 17, 0.9); /* Color var(--bg) con opacidad translúcida */
   display: flex;
   align-items: center;
   justify-content: center;

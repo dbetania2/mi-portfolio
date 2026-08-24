@@ -56,7 +56,19 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es">
+    <html lang="es" data-scroll-behavior="smooth" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const theme = localStorage.getItem('theme') || 'dark';
+                document.documentElement.setAttribute('data-theme', theme);
+              })()
+            `,
+          }}
+        />
+      </head>
       <body>
         <Navbar />
         {children}

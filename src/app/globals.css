@@ -12,12 +12,27 @@ html {
   --btn-bg: #090514;
   --font: 'VT323', monospace;
 
-  /* : escala fluida sin romper diseño */
+  /* Escala fluida sin romper diseño */
   --text-base: 1.25rem;
   --text-p: 1.55rem;
   --h1: 3rem;
   --h2: 2rem;
   --h3: 1.75rem;
+}
+
+[data-theme='light'] {
+  --bg: #ffe2e4;
+  --primary: #d31a64;
+  --secondary: #71183c;
+  --accent: #11050e;
+  --border: #d31a64;
+  --btn-bg: #ffeef3;
+}
+
+[data-theme='light'] body::before,
+[data-theme='light'] body::after {
+  opacity: 0.08;
+  filter: invert(1) hue-rotate(180deg);
 }
 
 /* ── RESET GLOBAL ── */

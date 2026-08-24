@@ -35,28 +35,66 @@
 
 /* ── NOMBRE ── */
 .nameContainer {
-  display: block;
+  display: inline-block;
   margin-bottom: 0.5rem;
-
   white-space: normal;
   word-break: keep-all;
   overflow-wrap: normal;
+  transition: transform 0.2s ease;
 }
 
-.letter {
+.nameText {
   display: inline-block;
   color: var(--accent);
-  transition: color 0.2s ease, transform 0.2s ease;
   white-space: pre;
-  cursor: default;
-
+  cursor: pointer;
   font-size: clamp(2rem, 8vw, 4.5rem);
   line-height: 1.1;
 }
 
-.letter:hover {
-  color: var(--secondary) !important;
-  transform: translateY(-5px);
+.pointer {
+  font-size: clamp(1.8rem, 7.5vw, 4rem);
+  line-height: 1.1;
+  color: var(--secondary);
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  display: inline-block;
+  white-space: nowrap;
+  transition: max-width 0.25s ease, opacity 0.25s ease;
+  vertical-align: middle;
+}
+
+.pointer.pointerVisible {
+  opacity: 1;
+  max-width: 4.5rem; /* Ajustado para dar espacio suficiente en la escala máxima */
+}
+
+.smallPointer {
+  font-size: 0.9em;
+  color: var(--secondary);
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  display: inline-block;
+  white-space: nowrap;
+  transition: max-width 0.25s ease, opacity 0.25s ease;
+  vertical-align: middle;
+}
+
+.smallPointer.pointerVisible {
+  opacity: 1;
+  max-width: 1.5rem;
+}
+
+.floating {
+  animation: retroFloat 2.4s ease-in-out infinite;
+}
+
+@keyframes retroFloat {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
 }
 
 .greeting {

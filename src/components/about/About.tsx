@@ -21,7 +21,8 @@ export default function About() {
           <div className={styles.visualCol}>
             <div className={`${styles.sprite} ${styles.bobRoss}`} />
             <p className={styles.quote}>
-              “ No cometemos errores, solo pequeños accidentes felices. ” — Bob Ross
+              “ No cometemos errores, solo pequeños accidentes felices. ”
+              <span className={styles.author}>— Bob Ross</span>
             </p>
           </div>
 

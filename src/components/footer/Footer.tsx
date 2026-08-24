@@ -1,12 +1,15 @@
 import styles from './Footer.module.css'
 import Image from 'next/image'
+import Link from 'next/link'
 import VisitorCounter from '../VisitorCounter/VisitorCounter'
+import ScrambleText from '../ScrambleText/ScrambleText'
 
 const links = [
-  { label: 'Sobre mí', href: '#about' },
-  { label: 'Stack', href: '#skills' },
-  { label: 'Proyectos', href: '#proyectos' },
-  { label: 'Contacto', href: '#contacto' },
+  { label: 'Sobre mí', href: '/#about' },
+  // { label: 'Mi historia', href: '/mystory' },
+  { label: 'Stack', href: '/#skills' },
+  { label: 'Proyectos', href: '/projects' },
+  { label: 'Contacto', href: '/#contacto' },
 ]
 
 const socials = [
@@ -43,9 +46,9 @@ export default function Footer() {
           <div className={styles.nav}>
             <p className={styles.navTitle}>Navegación</p>
             {links.map((link) => (
-              <a key={link.href} href={link.href} className={styles.navLink}>
+              <Link key={link.href} href={link.href} className={styles.navLink}>
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -67,7 +70,7 @@ export default function Footer() {
 
         {/* BOTTOM */}
         <div className={styles.bottom}>
-          <span>© {year} Daiana Del Grecco. Todos los derechos reservados.</span>
+          <span>© {year} <ScrambleText text="Daiana Del Grecco" className={styles.scrambleName} />. Todos los derechos reservados.</span>
           <span>Hecho con mucho amor.</span>
         </div>
 
