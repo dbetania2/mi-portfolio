@@ -1,10 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
 import styles from './ProjectsClient.module.css'
-import TechIcon from '@/components/TechIcon/TechIcon'
+import ProjectCard from '@/components/ProjectCard/ProjectCard'
 import type { Project } from './page'
 
 const FILTERS = [
@@ -37,46 +35,7 @@ export default function ProjectsClient({ projects }: { projects: Project[] }) {
 
       <div className={styles.grid}>
         {filtered.map((p) => (
-          <div key={p.id} className={`pixel-border ${styles.card}`}>
-
-            {p.image_url && (
-              <Link href={`/projects/${p.slug}`}>
-                <div className={styles.imgWrapper}>
-                  <Image
-                    src={p.image_url}
-                    alt={p.title}
-                    fill
-                    sizes="(max-width: 767px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className={styles.imgPixelated}
-                  />
-                </div>
-              </Link>
-            )}
-
-            <h3 className={styles.title}>{p.title}</h3>
-
-            <div className={styles.badges}>
-              {p.tech_stack?.map((t) => (
-                <TechIcon key={t} name={t} size="small" />
-              ))}
-            </div>
-
-            <div className={styles.buttons}>
-              {p.github_url && (
-                <a href={p.github_url} target="_blank" rel="noopener noreferrer" className={styles.cardBtn}>
-                  GitHub
-                </a>
-              )}
-              {p.live_url && (
-                <a href={p.live_url} target="_blank" rel="noopener noreferrer" className={styles.cardBtn}>
-                  Live
-                </a>
-              )}
-              <Link href={`/projects/${p.slug}`} className={styles.cardBtn}>
-                Ver detalle
-              </Link>
-            </div>
-          </div>
+          <ProjectCard key={p.id} project={p} isFeatured={false} />
         ))}
       </div>
 

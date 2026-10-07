@@ -21,17 +21,45 @@
   line-height: 1.6;
 }
 
-/* --- BLOQUES --- */
-.row {
+/* --- TARJETAS SOBRE MÍ --- */
+.aboutCard {
+  background-color: var(--card-bg);
+  border: 1px solid var(--magenta-shadow);
+  box-shadow: 0 0 15px var(--card-shadow);
+  padding: 3rem 1.5rem;
+  margin-bottom: 4rem;
+  position: relative;
+  
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8rem; /* ESPACIO GRANDE: Empuja el bloque de texto hacia abajo en móvil */
-  margin-bottom: 10rem;
-  
+  gap: 6rem; /* Espacio para los sprites */
 }
 
-.row:last-child {
+/* UI Corners retro (Cyan y Magenta) */
+.aboutCard::before,
+.aboutCard::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+}
+
+.aboutCard::before {
+  top: -2px;
+  left: -2px;
+  border-top: 3px solid var(--cyan-accent);
+  border-left: 3px solid var(--cyan-accent);
+}
+
+.aboutCard::after {
+  bottom: -2px;
+  right: -2px;
+  border-bottom: 3px solid var(--secondary);
+  border-right: 3px solid var(--secondary);
+}
+
+.aboutCard:last-child {
   margin-bottom: 0;
 }
 
@@ -39,10 +67,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end; /* Empuja la cita al fondo de la columna */
   position: relative;
-
-  height: 250px; 
+  height: 320px; /* Altura fija para contener el sprite escalado (250px) y el texto abajo */
+  width: 100%;
 }
 
 .textCol {
@@ -51,13 +79,21 @@
 }
 
 .blockTitle {
-  color: var(--secondary);
-  font-size: 1.75rem;
-  margin-bottom: 1.5rem;
+  color: var(--title-neon);
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem; /* Reducido para acercar el roleLabel */
   text-transform: uppercase;
-  border-bottom: 2px solid var(--primary);
-  display: inline-block;
-  padding-bottom: 0.3rem;
+  text-shadow: 0 0 8px var(--magenta-shadow);
+  letter-spacing: 1px;
+}
+
+.roleLabel {
+  display: block;
+  color: var(--cyan-accent); /* Color cyan de consola */
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 2px;
+  text-shadow: 0 0 5px var(--cyan-shadow);
 }
 
 .description {
@@ -72,9 +108,9 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   text-align: center;
-
-  margin-top: 19rem; 
+  margin-top: 0; /* Mala práctica eliminada: usar márgenes gigantes para suplir posicionamiento */
   animation: float 3s ease-in-out infinite;
+  z-index: 10; /* Asegura que el texto siempre quede por encima del sprite si chocan */
 }
 
 .author {
@@ -144,10 +180,11 @@
 
 /* --- DESKTOP --- */
 @media (min-width: 850px) {
-  .row {
+  .aboutCard {
     flex-direction: row;
     text-align: left;
-    gap: 10rem;
+    gap: 4rem;
+    padding: 4rem 5rem;
   }
 
   .reverse {

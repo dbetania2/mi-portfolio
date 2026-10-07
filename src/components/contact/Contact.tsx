@@ -48,7 +48,7 @@ export default function Contact() {
   return (
     <section id="contacto" className={styles.section}>
       <div className="container">
-        <h2>[ Contacto ]</h2>
+        <h2 className="title-neon">[ CONTACTO ]</h2>
 
         <div className={styles.layout}>
 

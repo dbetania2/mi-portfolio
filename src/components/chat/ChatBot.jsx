@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import styles from './ChatBot.module.css';
 import { sendMessageToBot } from '../../services/chatService';
 
@@ -30,7 +31,7 @@ const ChatBot = () => {
     try {
       const response = await sendMessageToBot(input);
       setMessages(prev => [...prev, { role: 'bot', content: response }]);
-    } catch (error) {
+    } catch {
       setMessages(prev => [...prev, { role: 'bot', content: 'Error de conexión. Intentá de nuevo.' }]);
     } finally {
       setIsLoading(false);
@@ -42,7 +43,7 @@ const ChatBot = () => {
       {/* BOTÓN DISPARADOR */}
       {!isOpen && (
         <button className={styles.launcher} onClick={() => setIsOpen(true)}>
-          <img src="/images/robot-head.png" alt="Bot" className={styles.robotImage} />
+          <Image src="/images/robot-head.png" alt="Bot" width={60} height={60} className={styles.robotImage} />
         </button>
       )}
 

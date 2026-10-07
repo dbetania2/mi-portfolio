@@ -12,6 +12,16 @@ export default function Hero() {
   const isPointerVisible = isDone || hasAnimatedOnce;
   const isSmallPointerVisible = !isDone && !hasAnimatedOnce;
 
+  const handlePointerClick = () => {
+    // Animación fluida de scroll hasta la sección de proyectos y centrado perfecto
+    document.getElementById('proyectos')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    
+    // Disparar evento para que el carrusel empiece a moverse solo
+    setTimeout(() => {
+      window.dispatchEvent(new Event('start-carousel-autoplay'));
+    }, 500); // Pequeño delay para que empiece cuando ya casi se hizo el scroll
+  }
+
   return (
     <section id="hero" className={styles.section}>
       <div className={styles.layout}>
@@ -28,7 +38,15 @@ export default function Hero() {
           </p>
           
           <h1 className={`${styles.nameContainer} ${isFloating ? styles.floating : ''}`}>
-            <span className={`${styles.pointer} ${isPointerVisible ? styles.pointerVisible : ''}`}>▶&nbsp;</span>
+            <span 
+              className={`${styles.pointer} ${isPointerVisible ? styles.pointerVisible : ''} ${styles.clickablePointer}`}
+              role="button"
+              onClick={handlePointerClick}
+              title="Ver Proyectos Destacados"
+              style={{ cursor: 'pointer' }}
+            >
+              ▶&nbsp;
+            </span>
             <ScrambleText 
               text={name} 
               className={styles.nameText} 

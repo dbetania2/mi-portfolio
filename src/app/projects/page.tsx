@@ -32,12 +32,14 @@ export default async function ProjectsPage() {
     <main className={styles.main}>
       <div className="container">
         
-        {/* Agregamos el botón de volver antes del título */}
-        <Link href="/" className={styles.back}>
-          &lt; Volver al inicio
-        </Link>
+        {/* Agregamos el botón de volver antes del título en su propio bloque */}
+        <div>
+          <Link href="/" className={styles.back}>
+            &lt; Volver al inicio
+          </Link>
+        </div>
 
-        <h2>[ Todos los Proyectos ]</h2>
+        <h2 className="title-neon">[ TODOS LOS PROYECTOS ]</h2>
         
         <ProjectsClient projects={projects} />
       </div>

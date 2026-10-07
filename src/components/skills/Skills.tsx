@@ -27,7 +27,7 @@ export default async function Skills() {
   return (
     <section id="skills" className={styles.section}>
       <div className="container">
-        <h2>[ Stack ]</h2>
+        <h2 className="title-neon">[ STACK ]</h2>
         <p style={{ color: 'var(--accent)', marginBottom: '2rem' }}>
           Puntuación basada en proyectos realizados.
         </p>

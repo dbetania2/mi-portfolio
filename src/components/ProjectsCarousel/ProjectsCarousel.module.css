@@ -1,0 +1,99 @@
+.carouselContainer {
+  width: 100%;
+  position: relative;
+  margin: 1rem 0 3rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  padding: 1rem 0;
+}
+
+.carouselTrack {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  height: 620px; /* Aumentado para contener tarjetas más altas */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1200px; /* Profundidad para el efecto 3D */
+}
+
+.slide {
+  position: absolute;
+  width: 380px; /* Tarjetas más anchas */
+  height: 540px; /* Altura proporcional aumentada */
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  cursor: pointer;
+  transform-style: preserve-3d;
+}
+
+/* Tarjeta Central (Activa) */
+.active {
+  transform: translateX(0) scale(1) translateZ(0);
+  z-index: 10;
+  filter: blur(0px);
+  opacity: 1;
+}
+
+/* Tarjeta Izquierda */
+.prev {
+  transform: translateX(-110%) scale(0.85) translateZ(-100px);
+  z-index: 5;
+  filter: blur(4px);
+  opacity: 0.6;
+}
+
+/* Tarjeta Derecha */
+.next {
+  transform: translateX(110%) scale(0.85) translateZ(-100px);
+  z-index: 5;
+  filter: blur(4px);
+  opacity: 0.6;
+}
+
+/* Tarjetas Ocultas */
+.hiddenLeft {
+  transform: translateX(-180%) scale(0.7) translateZ(-200px);
+  z-index: 1;
+  filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hiddenRight {
+  transform: translateX(180%) scale(0.7) translateZ(-200px);
+  z-index: 1;
+  filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .slide {
+    width: 320px; /* Un poco más ancha también en móviles */
+    height: 480px;
+  }
+  .prev {
+    transform: translateX(-60%) scale(0.8) translateZ(-50px);
+  }
+  .next {
+    transform: translateX(60%) scale(0.8) translateZ(-50px);
+  }
+}
+
+.controlsHint {
+  text-align: center;
+  color: var(--accent);
+  opacity: 0.6;
+  font-size: 1rem;
+  margin-top: 1rem;
+  animation: blink 2s infinite;
+  letter-spacing: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}

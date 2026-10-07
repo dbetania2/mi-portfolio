@@ -11,9 +11,9 @@ export default async function Home() {
   return (
     <main>
       <Hero />
+      <Projects />
       <About />
       <Skills />
-      <Projects />
       <Contact />
     </main>
   )

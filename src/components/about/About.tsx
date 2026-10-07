@@ -6,18 +6,10 @@ export default function About() {
       <div className="container">
 
         <header className={styles.header}>
-          <h2 className={styles.sectionTitle}>[ SOBRE MÍ ]</h2>
-
-          <p className={styles.intro}>
-            Hoy en día considero que un desarrollador <strong>full stack</strong> necesita ir más allá de escribir código.
-            Entender cómo se diseñan, conectan y construyen los sistemas es clave para crear soluciones completas,
-            eficientes y mantenibles.
-            <br /><br />
-            Por eso, mis intereses y experiencia se enfocan en <strong>tres áreas principales</strong>:
-          </p>
+          <h2 className="title-neon">[ SOBRE MÍ ]</h2>
         </header>
 
-        <article className={styles.row}>
+        <article className={styles.aboutCard}>
           <div className={styles.visualCol}>
             <div className={`${styles.sprite} ${styles.bobRoss}`} />
             <p className={styles.quote}>
@@ -28,7 +20,8 @@ export default function About() {
 
           <div className={styles.textCol}>
             <h3 className={styles.blockTitle}>Diseño</h3>
-            <p>
+            <span className={styles.roleLabel}>[ ROLE: UI/UX & PIXEL ARTIST ]</span>
+            <p className={styles.description}>
               El diseño es una de mis etapas favoritas del desarrollo.
               Trabajo con paletas de color, iconografía, wireframes y prototipos
               para definir la identidad visual y la estructura de las aplicaciones.
@@ -37,7 +30,7 @@ export default function About() {
           </div>
         </article>
 
-        <article className={`${styles.row} ${styles.reverse}`}>
+        <article className={`${styles.aboutCard} ${styles.reverse}`}>
           <div className={styles.visualCol}>
             <div className={`${styles.sprite} ${styles.pcYo}`} />
             <p className={styles.quote}>*tap* *tap*</p>
@@ -45,7 +38,8 @@ export default function About() {
 
           <div className={styles.textCol}>
             <h3 className={styles.blockTitle}>Programación</h3>
-            <p>
+            <span className={styles.roleLabel}>[ ROLE: FULL STACK DEVELOPER ]</span>
+            <p className={styles.description}>
               Desarrollo soluciones full stack trabajando tanto en frontend como backend.
               Integro herramientas modernas y, cuando es necesario, soluciones no-code
               para optimizar tiempos y procesos.
@@ -53,15 +47,16 @@ export default function About() {
           </div>
         </article>
 
-        <article className={styles.row}>
+        <article className={styles.aboutCard}>
           <div className={styles.visualCol}>
             <div className={`${styles.sprite} ${styles.yoRobot}`} />
-            <p className={styles.quote}>"beep boop beep"</p>
+            <p className={styles.quote}>&quot;beep boop beep&quot;</p>
           </div>
 
           <div className={styles.textCol}>
             <h3 className={styles.blockTitle}>Automatización</h3>
-            <p>
+            <span className={styles.roleLabel}>[ ROLE: AI & AUTOMATION ENGINEER ]</span>
+            <p className={styles.description}>
               Utilizo inteligencia artificial y automatización de procesos para reducir tareas repetitivas,
               optimizar flujos de trabajo y mejorar la eficiencia en desarrollo y gestión de proyectos.
             </p>

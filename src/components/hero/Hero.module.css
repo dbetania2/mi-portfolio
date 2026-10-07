@@ -70,6 +70,15 @@
   max-width: 4.5rem; /* Ajustado para dar espacio suficiente en la escala máxima */
 }
 
+.clickablePointer {
+  transition: transform 0.2s ease, text-shadow 0.2s ease;
+}
+
+.clickablePointer:hover {
+  transform: scale(1.2);
+  text-shadow: 0 0 15px var(--secondary);
+}
+
 .smallPointer {
   font-size: 0.9em;
   color: var(--secondary);

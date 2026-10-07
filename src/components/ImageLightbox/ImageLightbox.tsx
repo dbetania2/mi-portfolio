@@ -26,6 +26,7 @@ export default function ImageLightbox({ src, alt, priority = false }: Props) {
       document.addEventListener('keydown', handleKey)
     } else {
       document.body.style.overflow = 'unset'
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       setIsZoomed(false)
     }
     return () => {

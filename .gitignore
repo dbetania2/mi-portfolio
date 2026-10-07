@@ -41,3 +41,6 @@ next-env.d.ts
 
 # Seccion mi historia
 /src/app/mystory
+
+# Notas de diseño temporales
+docs/redesign_notes.md

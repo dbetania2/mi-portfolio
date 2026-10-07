@@ -33,6 +33,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const currentTheme = (document.documentElement.getAttribute('data-theme') || 'dark') as 'dark' | 'light'
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     setTheme(currentTheme)
   }, [])
 
