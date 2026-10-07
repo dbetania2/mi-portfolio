@@ -20,7 +20,7 @@ export default function About() {
 
           <div className={styles.textCol}>
             <h3 className={styles.blockTitle}>Diseño</h3>
-            <span className={styles.roleLabel}>[ ROLE: UI/UX & PIXEL ARTIST ]</span>
+            <span className={styles.roleLabel}>[ UX/UI ]</span>
             <p className={styles.description}>
               El diseño es una de mis etapas favoritas del desarrollo.
               Trabajo con paletas de color, iconografía, wireframes y prototipos
@@ -38,7 +38,7 @@ export default function About() {
 
           <div className={styles.textCol}>
             <h3 className={styles.blockTitle}>Programación</h3>
-            <span className={styles.roleLabel}>[ ROLE: FULL STACK DEVELOPER ]</span>
+            <span className={styles.roleLabel}>[ DEVELOPER ]</span>
             <p className={styles.description}>
               Desarrollo soluciones full stack trabajando tanto en frontend como backend.
               Integro herramientas modernas y, cuando es necesario, soluciones no-code
@@ -55,7 +55,7 @@ export default function About() {
 
           <div className={styles.textCol}>
             <h3 className={styles.blockTitle}>Automatización</h3>
-            <span className={styles.roleLabel}>[ ROLE: AI & AUTOMATION ENGINEER ]</span>
+            <span className={styles.roleLabel}>[ IA & AUTOMATION ]</span>
             <p className={styles.description}>
               Utilizo inteligencia artificial y automatización de procesos para reducir tareas repetitivas,
               optimizar flujos de trabajo y mejorar la eficiencia en desarrollo y gestión de proyectos.
