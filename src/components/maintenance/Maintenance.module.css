@@ -4,59 +4,117 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1.5rem;
+  padding: 2rem 1rem;
   position: relative;
   z-index: 10;
-  text-align: center;
+  font-family: var(--font);
 }
 
-.card {
-  background-color: var(--card-bg);
-  border: 4px solid var(--secondary);
+/* ── VENTANA DE TERMINAL (ANCHO GRANDE) ── */
+.terminalWindow {
+  width: 100%;
+  max-width: 960px;
+  background-color: #07040f;
+  border: 3px solid var(--secondary);
   box-shadow: 
-    0 0 20px var(--magenta-shadow),
+    0 0 25px rgba(211, 26, 100, 0.25),
     -4px -4px 0px var(--cyan-accent),
     4px 4px 0px var(--secondary);
-  padding: 3rem 2rem;
-  max-width: 650px;
-  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* ── BARRA SUPERIOR (WINDOW CHROME) ── */
+.windowBar {
+  background: linear-gradient(90deg, #180922 0%, #2b0b30 100%);
+  border-bottom: 2px solid var(--secondary);
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+.windowTitle {
+  color: var(--cyan-accent);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-shadow: 0 0 5px var(--cyan-shadow);
+}
+
+.windowControls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ttyBadge {
+  background: var(--primary);
+  color: var(--accent);
+  padding: 0.1rem 0.5rem;
+  font-size: 0.9rem;
+  border: 1px solid var(--secondary);
+}
+
+.controlButtons {
+  display: flex;
+  gap: 0.4rem;
+  color: var(--secondary);
+  font-size: 0.95rem;
+}
+
+/* ── CUERPO DE LA CONSOLA ── */
+.terminalBody {
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: var(--accent);
+  background: 
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15) 2px, transparent 2px, transparent 4px),
+    #07040f;
+}
+
+/* ── NEOFETCH SECTION ── */
+.neofetchContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px dashed rgba(211, 26, 100, 0.4);
+}
+
+.avatarColumn {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
-  position: relative;
+  justify-content: center;
+  gap: 1rem;
+  flex-shrink: 0;
+  padding: 0.5rem;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.4);
 }
 
-/* UI Corners retro (Cyan y Magenta) */
-.card::before,
-.card::after {
-  content: '';
-  position: absolute;
-  width: 16px;
-  height: 16px;
-}
-
-.card::before {
-  top: -4px;
-  left: -4px;
-  border-top: 3px solid var(--cyan-accent);
-  border-left: 3px solid var(--cyan-accent);
-}
-
-.card::after {
-  bottom: -4px;
-  right: -4px;
-  border-bottom: 3px solid var(--secondary);
-  border-right: 3px solid var(--secondary);
-}
-
-.spriteWrapper {
-  width: 120px;
-  height: 100px;
+.spritesRow {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  gap: 1.5rem;
+  height: 90px;
+  width: 140px;
+}
+
+.chibiSprite {
+  transform: scale(1.4);
 }
 
 .robotSprite {
@@ -65,7 +123,7 @@
   background-image: url('/sprites/yorobot.png');
   background-repeat: no-repeat;
   image-rendering: pixelated;
-  transform: scale(2.2);
+  transform: scale(1.5);
   animation: playRobot 0.7s steps(3) infinite;
 }
 
@@ -74,80 +132,228 @@
   to { background-position: -192px 0px; }
 }
 
-.systemTag {
+.avatarCaption {
+  font-size: 0.95rem;
   color: var(--cyan-accent);
-  font-size: 1.1rem;
-  letter-spacing: 2px;
-  text-shadow: 0 0 5px var(--cyan-shadow);
+  letter-spacing: 1px;
 }
 
-.title {
-  color: var(--title-neon);
-  font-size: clamp(1.8rem, 5vw, 2.6rem);
-  text-transform: uppercase;
-  text-shadow: 0 0 10px var(--magenta-shadow);
-  line-height: 1.2;
-}
-
-.message {
-  color: var(--accent);
-  font-size: 1.25rem;
-  line-height: 1.6;
-}
-
-.terminalBox {
-  width: 100%;
-  background: var(--bg);
-  border: 2px solid var(--primary);
-  padding: 1rem 1.25rem;
-  text-align: left;
-  font-size: 1.1rem;
-  color: var(--accent);
+.specsColumn {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.25rem;
+  text-align: left;
 }
 
-.terminalLine {
+.specsHeader {
+  color: var(--title-neon);
+  font-size: 1.35rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.specsDivider {
+  color: var(--secondary);
+  margin-bottom: 0.25rem;
+}
+
+.specRow {
   display: flex;
-  align-items: center;
   gap: 0.5rem;
-}
-
-.statusOk {
-  color: #39ff14;
-  text-shadow: 0 0 6px rgba(57, 255, 20, 0.5);
-}
-
-.statusWorking {
-  color: var(--title-color);
-  text-shadow: 0 0 6px var(--title-shadow);
-}
-
-.blink {
-  animation: blinker 1s steps(2, start) infinite;
-}
-
-@keyframes blinker {
-  to { visibility: hidden; }
-}
-
-.linksGroup {
-  display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
+}
+
+.specKey {
+  color: var(--cyan-accent);
+  min-width: 90px;
+}
+
+.specVal {
+  color: var(--accent);
+}
+
+.statusUnavailable {
+  color: #ff3366;
+  text-shadow: 0 0 5px rgba(255, 51, 102, 0.5);
+  font-weight: bold;
+}
+
+.colorBlocks {
+  display: flex;
+  gap: 0.4rem;
   margin-top: 0.5rem;
 }
 
-.contactBtn {
-  font-size: 1.1rem;
-  padding: 0.6rem 1.25rem;
+.colorBlock {
+  width: 18px;
+  height: 12px;
+  display: inline-block;
 }
 
-@media (max-width: 600px) {
-  .card {
-    padding: 2rem 1.25rem;
+/* ── SYSTEMD / BUILD LOGS ── */
+.logsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  text-align: left;
+  font-size: 1.15rem;
+}
+
+.logLine {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  word-break: break-word;
+}
+
+.logOk {
+  color: #39ff14;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.logInfo {
+  color: var(--cyan-accent);
+  font-weight: bold;
+}
+
+.logProgress {
+  color: var(--title-color);
+  font-weight: bold;
+}
+
+.progressBar {
+  color: var(--secondary);
+  letter-spacing: 1px;
+}
+
+/* ── COMMAND PROMPT & INTERACTIVE CLI ── */
+.cliSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  text-align: left;
+}
+
+.historyLogs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.historyCommand {
+  color: var(--cyan-accent);
+}
+
+.historyOutput {
+  color: var(--accent);
+  padding-left: 1rem;
+  white-space: pre-wrap;
+  line-height: 1.4;
+}
+
+.promptForm {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.promptPrefix {
+  color: var(--cyan-accent);
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+.promptInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-family: var(--font);
+  font-size: 1.25rem;
+  padding: 0;
+  caret-color: var(--cyan-accent);
+}
+
+.quickActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.quickActionLabel {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.cmdBtn {
+  background: #12061b;
+  color: var(--cyan-accent);
+  border: 1px solid var(--secondary);
+  padding: 0.3rem 0.7rem;
+  font-family: var(--font);
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.cmdBtn:hover {
+  background: var(--secondary);
+  color: #fff;
+  box-shadow: 0 0 10px var(--secondary);
+  transform: translateY(-2px);
+}
+
+.cmdBtnPrimary {
+  border-color: var(--cyan-accent);
+  color: #fff;
+}
+
+.cmdBtnPrimary:hover {
+  background: var(--cyan-accent);
+  color: #07040f;
+  box-shadow: 0 0 10px var(--cyan-shadow);
+}
+
+/* ── RESPONSIVE MOBILE ── */
+@media (max-width: 768px) {
+  .terminalWindow {
+    max-width: 100%;
+  }
+
+  .neofetchContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .avatarColumn {
+    align-self: center;
+    width: 100%;
+  }
+
+  .spritesRow {
+    width: 100%;
+  }
+
+  .promptPrefix {
+    font-size: 1rem;
+  }
+
+  .promptInput {
+    font-size: 1.1rem;
+  }
+
+  .terminalBody {
+    padding: 1.25rem 1rem;
+    font-size: 1.1rem;
   }
 }
-
