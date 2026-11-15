@@ -27,42 +27,26 @@ export default function Maintenance() {
       return
     }
 
-    if (trimmed === 'help') {
+    if (trimmed === 'help' || trimmed === 'ls') {
       output = `Comandos disponibles:
-  - ./linkedin.sh    : Abrir perfil de LinkedIn
-  - ./github.sh      : Abrir repositorio de GitHub
-  - ./instagram.sh   : Abrir cuenta de Instagram
-  - mail / contact   : Enviar un email directo
-  - whoami           : Información de la desarrolladora
-  - status           : Estado actual del deploy
-  - clear            : Limpiar historial de terminal`
-    } else if (trimmed === 'ls' || trimmed === 'ls -la' || trimmed === 'ls ./links') {
-      output = `-rwxr-xr-x  1 daiana staff   ./linkedin.sh
--rwxr-xr-x  1 daiana staff   ./github.sh
--rwxr-xr-x  1 daiana staff   ./instagram.sh
--rwxr-xr-x  1 daiana staff   ./email.sh
--rw-r--r--  1 daiana staff   about_me.txt`
-    } else if (trimmed === 'whoami' || trimmed === 'cat about_me.txt') {
-      output = `Daiana Del Grecco | Full Stack Developer & Automatización
-Diseño UI/UX, desarrollo web y optimización de procesos.`
-    } else if (trimmed === 'status') {
-      output = `HTTP/1.1 503 Service Unavailable
-State: En mantenimiento y actualización de componentes UI.
-Estimación: Volvemos en breve.`
+  - ./linkedin.sh : Abrir perfil de LinkedIn
+  - ./github.sh   : Abrir repositorio de GitHub
+  - ./email.sh    : Enviar email directo
+  - whoami        : Información de Daiana
+  - clear         : Limpiar consola`
+    } else if (trimmed === 'whoami') {
+      output = `Daiana Del Grecco | Full Stack Developer & Automatización`
     } else if (trimmed.includes('github') || trimmed === './github.sh') {
-      output = `Ejecutando ./github.sh... Abriendo GitHub en una nueva pestaña.`
+      output = `Abriendo GitHub en una nueva pestaña...`
       window.open('https://github.com/dbetania2', '_blank')
     } else if (trimmed.includes('linkedin') || trimmed === './linkedin.sh') {
-      output = `Ejecutando ./linkedin.sh... Abriendo LinkedIn en una nueva pestaña.`
+      output = `Abriendo LinkedIn en una nueva pestaña...`
       window.open('https://linkedin.com/in/daianadelgrecco/', '_blank')
-    } else if (trimmed.includes('instagram') || trimmed === './instagram.sh') {
-      output = `Ejecutando ./instagram.sh... Abriendo Instagram en una nueva pestaña.`
-      window.open('https://instagram.com/daianabetania', '_blank')
-    } else if (trimmed.includes('mail') || trimmed.includes('email') || trimmed === './email.sh' || trimmed.includes('contact')) {
-      output = `Iniciando cliente de correo hacia daiana076@gmail.com...`
+    } else if (trimmed.includes('mail') || trimmed.includes('email') || trimmed === './email.sh') {
+      output = `Abriendo cliente de correo hacia daiana076@gmail.com...`
       window.location.href = 'mailto:daiana076@gmail.com?subject=Contacto%20Portfolio'
     } else {
-      output = `bash: ${trimmed}: orden no encontrada. Escribí "help" para ver la lista de comandos.`
+      output = `orden no encontrada: ${trimmed}. Escribí "help" para ver los enlaces.`
     }
 
     const newItem: TerminalHistoryItem = {
@@ -92,7 +76,7 @@ Estimación: Volvemos en breve.`
         {/* ── BARRA SUPERIOR (WINDOW CHROME) ── */}
         <header className={styles.windowBar}>
           <div className={styles.windowTitle}>
-            <Image src="/DG.svg" alt="DG" width={20} height={20} priority />
+            <Image src="/DG.svg" alt="DG Logo" width={20} height={20} priority />
             <span>daiana@dai-os: ~/portfolio</span>
           </div>
           <div className={styles.windowControls}>
@@ -108,14 +92,10 @@ Estimación: Volvemos en breve.`
         {/* ── CUERPO DE LA CONSOLA ── */}
         <div className={styles.terminalBody}>
 
-          {/* 1. NEOFETCH SECTION */}
+          {/* 1. NEOFETCH SECTION (SOLO EL ROBOT) */}
           <section className={styles.neofetchContainer} aria-label="Información del sistema">
             <div className={styles.avatarColumn}>
-              <div className={styles.spritesRow}>
-                <div className={`chibi ${styles.chibiSprite}`} aria-hidden="true" />
-                <div className={styles.robotSprite} aria-hidden="true" />
-              </div>
-              <span className={styles.avatarCaption}>DAI_OS v1.0 [ROBOT+DEV]</span>
+              <div className={styles.robotSprite} aria-hidden="true" />
             </div>
 
             <div className={styles.specsColumn}>
@@ -123,31 +103,19 @@ Estimación: Volvemos en breve.`
               <p className={styles.specsDivider}>---------------------------------</p>
               
               <div className={styles.specRow}>
-                <span className={styles.specKey}>OS:</span>
-                <span className={styles.specVal}>DAI_OS v1.0 (Linux Mint / Next.js 16)</span>
-              </div>
-              <div className={styles.specRow}>
                 <span className={styles.specKey}>Host:</span>
                 <span className={styles.specVal}>daianadg-portfolio.vercel.app</span>
               </div>
               <div className={styles.specRow}>
                 <span className={styles.specKey}>Status:</span>
-                <span className={styles.statusUnavailable}>503 Service Unavailable (Deploying)</span>
+                <span className={styles.statusUnavailable}>503 Maintenance (Deploying v2.0)</span>
               </div>
               <div className={styles.specRow}>
-                <span className={styles.specKey}>Uptime:</span>
-                <span className={styles.specVal}>Actualizando componentes UI y proyectos...</span>
-              </div>
-              <div className={styles.specRow}>
-                <span className={styles.specKey}>Packages:</span>
-                <span className={styles.specVal}>Next.js 16, React 19, Turbopack, Supabase</span>
-              </div>
-              <div className={styles.specRow}>
-                <span className={styles.specKey}>Shell:</span>
-                <span className={styles.specVal}>bash 5.2.21</span>
+                <span className={styles.specKey}>Notice:</span>
+                <span className={styles.specVal}>Actualizando proyectos y componentes visuales.</span>
               </div>
 
-              {/* Terminal Color Blocks */}
+              {/* Bloques de colores de terminal */}
               <div className={styles.colorBlocks} aria-hidden="true">
                 <span className={styles.colorBlock} style={{ background: '#ff1e8a' }} />
                 <span className={styles.colorBlock} style={{ background: '#00f0ff' }} />
@@ -159,7 +127,7 @@ Estimación: Volvemos en breve.`
             </div>
           </section>
 
-          {/* 2. SYSTEMD / BUILD LOGS */}
+          {/* 2. SYSTEMD / DEPLOY LOGS */}
           <section className={styles.logsSection} aria-label="Logs de despliegue">
             <div className={styles.logLine}>
               <span className={styles.logOk}>[  OK  ]</span>
@@ -171,7 +139,7 @@ Estimación: Volvemos en breve.`
             </div>
             <div className={styles.logLine}>
               <span className={styles.logInfo}>[ INFO ]</span>
-              <span>Turbopack: Building new UI components & pixel shaders...</span>
+              <span>Turbopack: Building UI & pixel shaders...</span>
             </div>
             <div className={styles.logLine}>
               <span className={styles.logProgress}>[  ..  ]</span>
@@ -180,7 +148,7 @@ Estimación: Volvemos en breve.`
             </div>
           </section>
 
-          {/* 3. PROMPT INTERACTIVO Y ACCIONES RÁPIDAS */}
+          {/* 3. PROMPT Y ACCIONES DIRECTAS */}
           <section className={styles.cliSection} aria-label="Consola de comandos">
             {history.length > 0 && (
               <div className={styles.historyLogs}>
@@ -205,7 +173,7 @@ Estimación: Volvemos en breve.`
                 type="text"
                 value={inputCmd}
                 onChange={(e) => setInputCmd(e.target.value)}
-                placeholder="Escribí un comando (ej: help, ls, whoami)..."
+                placeholder="Escribí un comando o hacé clic abajo..."
                 className={styles.promptInput}
                 autoComplete="off"
                 spellCheck={false}
@@ -213,7 +181,7 @@ Estimación: Volvemos en breve.`
             </form>
 
             <div className={styles.quickActions}>
-              <span className={styles.quickActionLabel}>Acciones rápidas:</span>
+              <span className={styles.quickActionLabel}>Contacto:</span>
               <button
                 type="button"
                 className={`${styles.cmdBtn} ${styles.cmdBtnPrimary}`}
@@ -231,23 +199,9 @@ Estimación: Volvemos en breve.`
               <button
                 type="button"
                 className={styles.cmdBtn}
-                onClick={() => handleRunCommand('./instagram.sh')}
+                onClick={() => handleRunCommand('./email.sh')}
               >
-                ./instagram.sh
-              </button>
-              <button
-                type="button"
-                className={styles.cmdBtn}
-                onClick={() => handleRunCommand('mail -s "Hola"')}
-              >
-                mail -s &quot;Hola&quot;
-              </button>
-              <button
-                type="button"
-                className={styles.cmdBtn}
-                onClick={() => handleRunCommand('help')}
-              >
-                help
+                ./email.sh
               </button>
             </div>
           </section>

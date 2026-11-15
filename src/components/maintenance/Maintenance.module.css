@@ -1,29 +1,32 @@
 .screen {
+  height: 100vh;
   min-height: 100vh;
+  width: 100vw;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1rem;
+  padding: 1.5rem 1rem;
   position: relative;
   z-index: 10;
   font-family: var(--font);
+  overflow: hidden;
 }
 
-/* ── VENTANA DE TERMINAL (ANCHO GRANDE) ── */
+/* ── VENTANA DE TERMINAL CONTENIDA ── */
 .terminalWindow {
   width: 100%;
-  max-width: 960px;
+  max-width: 820px;
+  max-height: calc(100vh - 3rem);
   background-color: #07040f;
   border: 3px solid var(--secondary);
   box-shadow: 
     0 0 25px rgba(211, 26, 100, 0.25),
     -4px -4px 0px var(--cyan-accent),
     4px 4px 0px var(--secondary);
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
+  overflow: hidden;
 }
 
 /* ── BARRA SUPERIOR (WINDOW CHROME) ── */
@@ -35,8 +38,9 @@
   align-items: center;
   justify-content: space-between;
   user-select: none;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   letter-spacing: 1px;
+  flex-shrink: 0;
 }
 
 .windowTitle {
@@ -57,7 +61,7 @@
   background: var(--primary);
   color: var(--accent);
   padding: 0.1rem 0.5rem;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   border: 1px solid var(--secondary);
 }
 
@@ -65,56 +69,56 @@
   display: flex;
   gap: 0.4rem;
   color: var(--secondary);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
-/* ── CUERPO DE LA CONSOLA ── */
+/* ── CUERPO DE LA CONSOLA (CON SCROLL INTERNO) ── */
 .terminalBody {
-  padding: 1.5rem 1.75rem;
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.25rem 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  font-size: 1.25rem;
-  line-height: 1.5;
+  gap: 1.25rem;
+  font-size: 1.2rem;
+  line-height: 1.45;
   color: var(--accent);
   background: 
-    repeating-linear-gradient(0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15) 2px, transparent 2px, transparent 4px),
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.18), rgba(0,0,0,0.18) 2px, transparent 2px, transparent 4px),
     #07040f;
 }
 
-/* ── NEOFETCH SECTION ── */
+/* Custom scrollbar retro */
+.terminalBody::-webkit-scrollbar {
+  width: 6px;
+}
+.terminalBody::-webkit-scrollbar-track {
+  background: #07040f;
+}
+.terminalBody::-webkit-scrollbar-thumb {
+  background: var(--secondary);
+}
+
+/* ── NEOFETCH SECTION (SOLO ROBOT) ── */
 .neofetchContainer {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 2.5rem;
-  padding-bottom: 1.25rem;
+  gap: 2rem;
+  padding-bottom: 1rem;
   border-bottom: 1px dashed rgba(211, 26, 100, 0.4);
+  flex-shrink: 0;
 }
 
 .avatarColumn {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
   flex-shrink: 0;
-  padding: 0.5rem;
-  border: 1px solid rgba(0, 255, 255, 0.2);
-  background: rgba(0, 0, 0, 0.4);
-}
-
-.spritesRow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
+  width: 110px;
   height: 90px;
-  width: 140px;
-}
-
-.chibiSprite {
-  transform: scale(1.4);
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 255, 255, 0.2);
 }
 
 .robotSprite {
@@ -123,7 +127,7 @@
   background-image: url('/sprites/yorobot.png');
   background-repeat: no-repeat;
   image-rendering: pixelated;
-  transform: scale(1.5);
+  transform: scale(1.6);
   animation: playRobot 0.7s steps(3) infinite;
 }
 
@@ -132,30 +136,24 @@
   to { background-position: -192px 0px; }
 }
 
-.avatarCaption {
-  font-size: 0.95rem;
-  color: var(--cyan-accent);
-  letter-spacing: 1px;
-}
-
 .specsColumn {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.2rem;
   text-align: left;
 }
 
 .specsHeader {
   color: var(--title-neon);
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   font-weight: bold;
   letter-spacing: 1px;
 }
 
 .specsDivider {
   color: var(--secondary);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.15rem;
 }
 
 .specRow {
@@ -166,7 +164,7 @@
 
 .specKey {
   color: var(--cyan-accent);
-  min-width: 90px;
+  min-width: 75px;
 }
 
 .specVal {
@@ -182,12 +180,12 @@
 .colorBlocks {
   display: flex;
   gap: 0.4rem;
-  margin-top: 0.5rem;
+  margin-top: 0.4rem;
 }
 
 .colorBlock {
-  width: 18px;
-  height: 12px;
+  width: 16px;
+  height: 10px;
   display: inline-block;
 }
 
@@ -195,22 +193,22 @@
 .logsSection {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.3rem;
   text-align: left;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
+  flex-shrink: 0;
 }
 
 .logLine {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.6rem;
   word-break: break-word;
 }
 
 .logOk {
   color: #39ff14;
   font-weight: bold;
-  letter-spacing: 1px;
 }
 
 .logInfo {
@@ -225,21 +223,21 @@
 
 .progressBar {
   color: var(--secondary);
-  letter-spacing: 1px;
 }
 
 /* ── COMMAND PROMPT & INTERACTIVE CLI ── */
 .cliSection {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.6rem;
   text-align: left;
+  flex-shrink: 0;
 }
 
 .historyLogs {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.3rem;
 }
 
 .historyCommand {
@@ -248,9 +246,9 @@
 
 .historyOutput {
   color: var(--accent);
-  padding-left: 1rem;
+  padding-left: 0.75rem;
   white-space: pre-wrap;
-  line-height: 1.4;
+  line-height: 1.3;
 }
 
 .promptForm {
@@ -273,7 +271,7 @@
   outline: none;
   color: #fff;
   font-family: var(--font);
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   padding: 0;
   caret-color: var(--cyan-accent);
 }
@@ -281,13 +279,13 @@
 .quickActions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
+  gap: 0.5rem;
   align-items: center;
-  margin-top: 0.5rem;
+  margin-top: 0.35rem;
 }
 
 .quickActionLabel {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.6);
 }
 
@@ -295,12 +293,12 @@
   background: #12061b;
   color: var(--cyan-accent);
   border: 1px solid var(--secondary);
-  padding: 0.3rem 0.7rem;
+  padding: 0.25rem 0.65rem;
   font-family: var(--font);
-  font-size: 1.05rem;
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.15s ease;
-  min-height: 38px;
+  min-height: 36px;
   display: inline-flex;
   align-items: center;
 }
@@ -308,8 +306,8 @@
 .cmdBtn:hover {
   background: var(--secondary);
   color: #fff;
-  box-shadow: 0 0 10px var(--secondary);
-  transform: translateY(-2px);
+  box-shadow: 0 0 8px var(--secondary);
+  transform: translateY(-1px);
 }
 
 .cmdBtnPrimary {
@@ -320,40 +318,31 @@
 .cmdBtnPrimary:hover {
   background: var(--cyan-accent);
   color: #07040f;
-  box-shadow: 0 0 10px var(--cyan-shadow);
+  box-shadow: 0 0 8px var(--cyan-shadow);
 }
 
 /* ── RESPONSIVE MOBILE ── */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
+  .screen {
+    padding: 0.5rem;
+  }
+
   .terminalWindow {
-    max-width: 100%;
+    max-height: calc(100vh - 1rem);
   }
 
   .neofetchContainer {
     flex-direction: column;
     align-items: flex-start;
-    gap: 1.25rem;
+    gap: 1rem;
   }
 
   .avatarColumn {
     align-self: center;
-    width: 100%;
-  }
-
-  .spritesRow {
-    width: 100%;
-  }
-
-  .promptPrefix {
-    font-size: 1rem;
-  }
-
-  .promptInput {
-    font-size: 1.1rem;
   }
 
   .terminalBody {
-    padding: 1.25rem 1rem;
-    font-size: 1.1rem;
+    padding: 1rem 0.75rem;
+    font-size: 1.05rem;
   }
 }
