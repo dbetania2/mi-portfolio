@@ -3,10 +3,11 @@ import './globals.css'
 import Navbar from '@/components/navbar/Navbar'
 import Footer from '@/components/footer/Footer'
 import ChatBot from '@/components/chat/ChatBot'
-import { Analytics } from "@vercel/analytics/next"
+import Maintenance from '@/components/maintenance/Maintenance'
+import { Analytics } from '@vercel/analytics/next'
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://daianadg-portfolio.vercel.app"),
+  metadataBase: new URL('https://daianadg-portfolio.vercel.app'),
   title: 'Daiana Del Grecco | Desarrolladora Full Stack & Automatización',
   description:
     'Portfolio con proyectos de desarrollo web Full Stack, automatización de procesos y diseño de interfaces.',
@@ -55,6 +56,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const isMaintenance =
+    process.env.MAINTENANCE_MODE === 'true' ||
+    process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true'
+
   return (
     <html lang="es" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
@@ -70,10 +75,16 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <Navbar />
-        {children}
-        <Footer />
-        <ChatBot />
+        {isMaintenance ? (
+          <Maintenance />
+        ) : (
+          <>
+            <Navbar />
+            {children}
+            <Footer />
+            <ChatBot />
+          </>
+        )}
         <Analytics />
       </body>
     </html>

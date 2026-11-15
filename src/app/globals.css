@@ -146,6 +146,13 @@ a, button, .pixel-btn, .navbar-hamburger, [role="button"] {
   cursor: url('/cursor/mano.png') 12 0, pointer !important;
 }
 
+/* ── ACCESIBILIDAD Y ENFOQUE VISIBLE (WCAG AA) ── */
+:focus-visible {
+  outline: 2px dashed var(--cyan-accent);
+  outline-offset: 3px;
+  box-shadow: 0 0 8px var(--cyan-shadow);
+}
+
 a {
   color: var(--secondary);
   text-decoration: none;
@@ -164,7 +171,7 @@ section {
 
 .container {
   width: 100%;
-  max-width: 80.25rem;
+  max-width: 80rem;
   margin: 0 auto;
   padding: 0 1rem;
 }

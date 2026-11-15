@@ -8,12 +8,13 @@ interface ScrambleTextProps {
   onComplete?: () => void
 }
 
+const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+
 export default function ScrambleText({ text, className, onStart, onComplete }: ScrambleTextProps) {
   const [displayText, setDisplayText] = useState(text)
   const isAnimating = useRef(false)
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
-  // Guardamos las referencias actualizadas de las funciones callback para evitar re-crear triggerAnimation
   const onStartRef = useRef(onStart)
   const onCompleteRef = useRef(onComplete)
 
@@ -22,13 +23,26 @@ export default function ScrambleText({ text, className, onStart, onComplete }: S
     onCompleteRef.current = onComplete
   }, [onStart, onComplete])
 
+  const stopAnimation = useCallback(() => {
+    if (intervalRef.current !== null) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
+    }
+    isAnimating.current = false
+  }, [])
+
   const triggerAnimation = useCallback(() => {
     if (isAnimating.current) return
     isAnimating.current = true
-    if (onStartRef.current) onStartRef.current()
+    onStartRef.current?.()
 
     let iterations = 0
-    const interval = setInterval(() => {
+
+    if (intervalRef.current !== null) {
+      clearInterval(intervalRef.current)
+    }
+
+    intervalRef.current = setInterval(() => {
       setDisplayText(
         text
           .split('')
@@ -37,24 +51,26 @@ export default function ScrambleText({ text, className, onStart, onComplete }: S
               return text[index]
             }
             if (char === ' ') return ' '
-            return chars[Math.floor(Math.random() * chars.length)]
+            return CHARS[Math.floor(Math.random() * CHARS.length)]
           })
           .join('')
       )
 
       if (iterations >= text.length) {
-        clearInterval(interval)
-        isAnimating.current = false
-        if (onCompleteRef.current) onCompleteRef.current()
+        stopAnimation()
+        onCompleteRef.current?.()
       }
 
       iterations += 1 / 3
     }, 30)
-  }, [text])
+  }, [text, stopAnimation])
 
   useEffect(() => {
     triggerAnimation()
-  }, [triggerAnimation])
+    return () => {
+      stopAnimation()
+    }
+  }, [triggerAnimation, stopAnimation])
 
   return (
     <span 

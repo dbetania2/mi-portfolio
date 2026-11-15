@@ -1,27 +1,33 @@
 'use client'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useSyncExternalStore } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import styles from './Navbar.module.css'
+import { NAV_LINKS, NavLink } from '@/config/navigation'
 
-interface NavLink {
-  label: string
-  href: string
-  isRoute?: boolean
+function subscribeTheme(callback: () => void) {
+  window.addEventListener('storage', callback)
+  window.addEventListener('themechange', callback)
+  return () => {
+    window.removeEventListener('storage', callback)
+    window.removeEventListener('themechange', callback)
+  }
 }
 
-const links: NavLink[] = [
-  { label: 'Sobre mí',    href: '#about' },
-  // { label: 'Mi historia',  href: '/mystory', isRoute: true },
-  { label: 'Stack',       href: '#skills' },
-  { label: 'Proyectos',   href: '/projects', isRoute: true },
-  { label: 'Contacto',    href: '#contacto' },
-]
+function getThemeSnapshot(): 'dark' | 'light' {
+  if (typeof document === 'undefined') return 'dark'
+  const currentTheme = document.documentElement.getAttribute('data-theme')
+  return currentTheme === 'light' ? 'light' : 'dark'
+}
+
+function getServerThemeSnapshot(): 'dark' | 'light' {
+  return 'dark'
+}
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
+  const theme = useSyncExternalStore(subscribeTheme, getThemeSnapshot, getServerThemeSnapshot)
   const pathname = usePathname()
   const navRef = useRef<HTMLDivElement>(null)
   const isHome = pathname === '/'
@@ -31,55 +37,54 @@ export default function Navbar() {
     return isHome ? link.href : `/${link.href}`
   }
 
-  useEffect(() => {
-    const currentTheme = (document.documentElement.getAttribute('data-theme') || 'dark') as 'dark' | 'light'
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    setTheme(currentTheme)
-  }, [])
-
   const toggleTheme = () => {
     const nextTheme = theme === 'dark' ? 'light' : 'dark'
-    setTheme(nextTheme)
     document.documentElement.setAttribute('data-theme', nextTheme)
     localStorage.setItem('theme', nextTheme)
+    window.dispatchEvent(new Event('themechange'))
   }
 
+  // Cierre de menú responsive al cambiar tamaño de pantalla
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (navRef.current && !navRef.current.contains(event.target as Node)) {
-        setOpen(false)
-      }
-    }
     const handleResize = () => {
       if (window.innerWidth >= 768) {
         setOpen(false)
       }
     }
-    if (open) {
-      document.addEventListener('mousedown', handleClickOutside)
-    }
     window.addEventListener('resize', handleResize)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-      window.removeEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  // Cierre al hacer click fuera del menú abierto
+  useEffect(() => {
+    if (!open) return
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setOpen(false)
+      }
     }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [open])
 
   return (
-    <nav className={styles.nav} ref={navRef}>
-      <Link href="/#hero" className={styles.logo} onClick={() => setOpen(false)}>
+    <nav className={styles.nav} ref={navRef} aria-label="Navegación principal">
+      <Link href="/#hero" className={styles.logo} onClick={() => setOpen(false)} aria-label="Ir al inicio">
         <Image 
           src="/DG.svg" 
-          alt="Logo DG" 
+          alt="Logo Daiana Del Grecco" 
           width={40} 
           height={40} 
           className={styles.logoSvg}
+          priority
         />
       </Link>
 
       <div className={styles.rightSection}>
         <ul className={styles.links}>
-          {links.map((link) => (
+          {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <Link href={getHref(link)}>{link.label}</Link>
             </li>
@@ -89,7 +94,8 @@ export default function Navbar() {
         <button 
           onClick={toggleTheme} 
           className={`${styles.themeToggle} ${theme === 'light' ? styles.themeToggleActive : ''}`} 
-          aria-label="Cambiar tema"
+          aria-label={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+          type="button"
         >
           <div className={styles.toggleThumb} />
         </button>
@@ -98,14 +104,17 @@ export default function Navbar() {
           className={styles.hamburger} 
           onClick={() => setOpen(!open)}
           aria-expanded={open}
+          aria-controls="mobile-nav-menu"
+          aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
+          type="button"
         >
           {open ? '[ cerrar ]' : '[ menú ]'}
         </button>
       </div>
 
       {open && (
-        <ul className={styles.mobileMenu}>
-          {links.map((link) => (
+        <ul id="mobile-nav-menu" className={styles.mobileMenu}>
+          {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <Link 
                 href={getHref(link)} 

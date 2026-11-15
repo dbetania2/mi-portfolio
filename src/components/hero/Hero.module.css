@@ -35,12 +35,13 @@
 
 /* ── NOMBRE ── */
 .nameContainer {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   margin-bottom: 0.5rem;
-  white-space: normal;
+  white-space: nowrap;
   word-break: keep-all;
   overflow-wrap: normal;
-  transition: transform 0.2s ease;
+  will-change: transform;
 }
 
 .nameText {
@@ -57,43 +58,30 @@
   line-height: 1.1;
   color: var(--secondary);
   opacity: 0;
-  max-width: 0;
-  overflow: hidden;
-  display: inline-block;
+  visibility: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   white-space: nowrap;
-  transition: max-width 0.25s ease, opacity 0.25s ease;
   vertical-align: middle;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  pointer-events: none;
+  transition: opacity 0.35s ease, visibility 0.35s ease, transform 0.2s ease, text-shadow 0.2s ease;
 }
 
 .pointer.pointerVisible {
   opacity: 1;
-  max-width: 4.5rem; /* Ajustado para dar espacio suficiente en la escala máxima */
-}
-
-.clickablePointer {
-  transition: transform 0.2s ease, text-shadow 0.2s ease;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .clickablePointer:hover {
-  transform: scale(1.2);
+  transform: scale(1.15);
   text-shadow: 0 0 15px var(--secondary);
-}
-
-.smallPointer {
-  font-size: 0.9em;
-  color: var(--secondary);
-  opacity: 0;
-  max-width: 0;
-  overflow: hidden;
-  display: inline-block;
-  white-space: nowrap;
-  transition: max-width 0.25s ease, opacity 0.25s ease;
-  vertical-align: middle;
-}
-
-.smallPointer.pointerVisible {
-  opacity: 1;
-  max-width: 1.5rem;
 }
 
 .floating {
@@ -102,7 +90,7 @@
 
 @keyframes retroFloat {
   0% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  50% { transform: translateY(-6px); }
   100% { transform: translateY(0); }
 }
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 import styles from './ImageLightbox.module.css'
 
@@ -12,36 +12,38 @@ type Props = {
 
 export default function ImageLightbox({ src, alt, priority = false }: Props) {
   const [open, setOpen] = useState(false)
-  const [isZoomed, setIsZoomed] = useState(false) // Nuevo estado para el zoom interno
+  const [isZoomed, setIsZoomed] = useState(false)
+
+  const handleClose = useCallback(() => {
+    setOpen(false)
+    setIsZoomed(false)
+  }, [])
 
   useEffect(() => {
+    if (!open) return
+
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        setOpen(false)
-        setIsZoomed(false)
+        handleClose()
       }
     }
-    if (open) {
-      document.body.style.overflow = 'hidden'
-      document.addEventListener('keydown', handleKey)
-    } else {
-      document.body.style.overflow = 'unset'
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      setIsZoomed(false)
-    }
+
+    document.body.style.overflow = 'hidden'
+    document.addEventListener('keydown', handleKey)
+
     return () => {
       document.body.style.overflow = 'unset'
       document.removeEventListener('keydown', handleKey)
     }
-  }, [open])
+  }, [open, handleClose])
 
   return (
     <>
-      <div
+      <button
+        type="button"
         className={styles.imgWrapper}
         onClick={() => setOpen(true)}
-        role="button"
-        aria-label="Ver imagen completa"
+        aria-label={`Ampliar imagen: ${alt}`}
       >
         <Image
           src={src}
@@ -51,20 +53,23 @@ export default function ImageLightbox({ src, alt, priority = false }: Props) {
           className={styles.img}
           priority={priority}
         />
-        <span className={styles.imgHint}>[ click para ampliar ]</span>
-      </div>
+        <span className={styles.imgHint} aria-hidden="true">[ click para ampliar ]</span>
+      </button>
 
       {open && (
         <div
           className={styles.overlay}
-          onClick={() => {
-            setOpen(false)
-            setIsZoomed(false)
-          }}
+          onClick={handleClose}
           role="dialog"
           aria-modal="true"
+          aria-label={`Vista ampliada de ${alt}`}
         >
-          <button className={styles.closeBtn} onClick={() => setOpen(false)}>
+          <button 
+            type="button"
+            className={styles.closeBtn} 
+            onClick={handleClose}
+            aria-label="Cerrar vista ampliada"
+          >
             [ X ] Cerrar
           </button>
           
@@ -72,8 +77,17 @@ export default function ImageLightbox({ src, alt, priority = false }: Props) {
             className={`${styles.lightbox} ${isZoomed ? styles.zoomed : ''}`} 
             onClick={(e) => {
               e.stopPropagation()
-              setIsZoomed(!isZoomed) // Cambia entre zoom y vista normal
+              setIsZoomed((prev) => !prev)
             }}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.stopPropagation()
+                setIsZoomed((prev) => !prev)
+              }
+            }}
+            aria-label={isZoomed ? 'Reducir zoom' : 'Aumentar zoom'}
           >
             <Image
               src={src}

@@ -20,6 +20,10 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
   if (!project) notFound()
 
+  const paragraphs = (project.description?.split(/\r?\n/) || [])
+    .map((p: string) => p.trim())
+    .filter(Boolean)
+
   return (
     <main className={styles.main}>
       <div className="container">
@@ -35,14 +39,17 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         )}
 
         <div className={styles.body}>
-          <div className={styles.description}>
+          <article className={styles.description}>
             <h2 className={styles.sectionTitle}>&gt; Descripción</h2>
-            {project.description?.split(/\r?\n/).map((paragraph: string, index: number) => (
-              paragraph.trim() !== "" && (
-                <p key={index} className={styles.paragraph}>{paragraph}</p>
-              )
+            {paragraphs.map((paragraph: string, index: number) => (
+              <p 
+                key={`${slug}-paragraph-${index}-${paragraph.slice(0, 15)}`} 
+                className={styles.paragraph}
+              >
+                {paragraph}
+              </p>
             ))}
-          </div>
+          </article>
 
           <aside className={styles.sidebar}>
             <div className={styles.sideBlock}>

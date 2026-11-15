@@ -3,20 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import VisitorCounter from '../VisitorCounter/VisitorCounter'
 import ScrambleText from '../ScrambleText/ScrambleText'
-
-const links = [
-  { label: 'Sobre mí', href: '/#about' },
-  // { label: 'Mi historia', href: '/mystory' },
-  { label: 'Stack', href: '/#skills' },
-  { label: 'Proyectos', href: '/projects' },
-  { label: 'Contacto', href: '/#contacto' },
-]
-
-const socials = [
-  { name: 'LinkedIn', icon: '/icons/linkedin.png', url: 'https://linkedin.com/in/daianadelgrecco/' },
-  { name: 'GitHub', icon: '/icons/github.png', url: 'https://github.com/dbetania2' },
-  { name: 'Instagram', icon: '/icons/instagram.png', url: 'https://instagram.com/daianabetania' },
-]
+import { NAV_LINKS, SOCIAL_LINKS } from '@/config/navigation'
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -43,21 +30,31 @@ export default function Footer() {
           </div>
 
           {/* NAV */}
-          <div className={styles.nav}>
+          <nav className={styles.nav} aria-label="Navegación del pie de página">
             <p className={styles.navTitle}>Navegación</p>
-            {links.map((link) => (
-              <Link key={link.href} href={link.href} className={styles.navLink}>
-                {link.label}
-              </Link>
-            ))}
-          </div>
+            {NAV_LINKS.map((link) => {
+              const targetHref = link.href.startsWith('#') ? `/${link.href}` : link.href
+              return (
+                <Link key={link.href} href={targetHref} className={styles.navLink}>
+                  {link.label}
+                </Link>
+              )
+            })}
+          </nav>
 
           {/* SOCIALS */}
           <div className={styles.socials}>
             <p className={styles.socialsTitle}>Redes</p>
-            {socials.map((s) => (
-              <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
-                <Image src={s.icon} alt={s.name} width={23} height={18} className={styles.socialIcon} />
+            {SOCIAL_LINKS.map((s) => (
+              <a 
+                key={s.name} 
+                href={s.url} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className={styles.socialLink}
+                aria-label={`Visitar perfil en ${s.name}`}
+              >
+                <Image src={s.icon} alt="" width={23} height={18} className={styles.socialIcon} aria-hidden="true" />
                 {s.name}
               </a>
             ))}

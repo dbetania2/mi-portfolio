@@ -4,56 +4,50 @@ import styles from './Hero.module.css'
 import ScrambleText from '../ScrambleText/ScrambleText'
 
 export default function Hero() {
-  const name = "Daiana Del Grecco";
-  const [isDone, setIsDone] = useState(false);
-  const [hasAnimatedOnce, setHasAnimatedOnce] = useState(false);
+  const name = 'Daiana Del Grecco'
+  const [isDone, setIsDone] = useState(false)
+  const [hasAnimatedOnce, setHasAnimatedOnce] = useState(false)
 
-  const isFloating = isDone || hasAnimatedOnce;
-  const isPointerVisible = isDone || hasAnimatedOnce;
-  const isSmallPointerVisible = !isDone && !hasAnimatedOnce;
+  const isFloating = isDone || hasAnimatedOnce
+  const isPointerVisible = isDone || hasAnimatedOnce
 
   const handlePointerClick = () => {
-    // Animación fluida de scroll hasta la sección de proyectos y centrado perfecto
-    document.getElementById('proyectos')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    
-    // Disparar evento para que el carrusel empiece a moverse solo
-    setTimeout(() => {
-      window.dispatchEvent(new Event('start-carousel-autoplay'));
-    }, 500); // Pequeño delay para que empiece cuando ya casi se hizo el scroll
+    document.getElementById('proyectos')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    window.dispatchEvent(new Event('start-carousel-autoplay'))
   }
 
   return (
-    <section id="hero" className={styles.section}>
+    <section id="hero" className={styles.section} aria-label="Introducción">
       <div className={styles.layout}>
 
-        <div className={styles.spriteContainer}>
+        <div className={styles.spriteContainer} aria-hidden="true">
           <div className={`chibi ${styles.chibiScaled}`} />
         </div>
 
         <div className={styles.text}>
           
           <p className={styles.greeting}>
-            <span className={`${styles.smallPointer} ${isSmallPointerVisible ? styles.pointerVisible : ''}`}>▶&nbsp;</span>
-            Hola, soy
+            &gt; Hola, soy
           </p>
           
           <h1 className={`${styles.nameContainer} ${isFloating ? styles.floating : ''}`}>
-            <span 
+            <button 
+              type="button"
               className={`${styles.pointer} ${isPointerVisible ? styles.pointerVisible : ''} ${styles.clickablePointer}`}
-              role="button"
               onClick={handlePointerClick}
               title="Ver Proyectos Destacados"
-              style={{ cursor: 'pointer' }}
+              aria-label="Ver proyectos destacados"
+              tabIndex={isPointerVisible ? 0 : -1}
             >
               ▶&nbsp;
-            </span>
+            </button>
             <ScrambleText 
               text={name} 
               className={styles.nameText} 
               onStart={() => setIsDone(false)}
               onComplete={() => {
-                setIsDone(true);
-                setHasAnimatedOnce(true);
+                setIsDone(true)
+                setHasAnimatedOnce(true)
               }}
             />
           </h1>
@@ -62,7 +56,6 @@ export default function Hero() {
             Full Stack Developer
           </h2>
 
-          {/* Le quitamos los estilos en línea, ahora todo lo controla la clase .description */}
           <p className={styles.description}>
             Desarrollo web, automatización de procesos y diseño de interfaces.
           </p>
