@@ -26,14 +26,15 @@
   background-color: var(--card-bg);
   border: 1px solid var(--magenta-shadow);
   box-shadow: 0 0 15px var(--card-shadow);
-  padding: 3rem 1.5rem;
-  margin-bottom: 4rem;
+  padding: 2.5rem 1.25rem;
+  margin-bottom: 3.5rem;
   position: relative;
   
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6rem; /* Espacio para los sprites */
+  gap: 2.5rem;
+  overflow: hidden; /* Evita cualquier desborde fuera de la tarjeta */
 }
 
 /* UI Corners retro (Cyan y Magenta) */
@@ -63,14 +64,24 @@
   margin-bottom: 0;
 }
 
+/* Columna visual con flujo vertical ordenado */
 .visualCol {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end; /* Empuja la cita al fondo de la columna */
-  position: relative;
-  min-height: 320px; /* Altura mínima flexible para contener sprite y cita */
+  justify-content: center;
+  gap: 1.25rem;
   width: 100%;
+}
+
+/* Contenedor del sprite con altura definida */
+.spriteWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 175px; /* Altura segura en móvil para el sprite escalado */
 }
 
 .textCol {
@@ -81,7 +92,7 @@
 .blockTitle {
   color: var(--title-neon);
   font-size: 1.8rem;
-  margin-bottom: 0.5rem; /* Reducido para acercar el roleLabel */
+  margin-bottom: 0.5rem;
   text-transform: uppercase;
   text-shadow: 0 0 8px var(--magenta-shadow);
   letter-spacing: 1px;
@@ -89,7 +100,7 @@
 
 .roleLabel {
   display: block;
-  color: var(--cyan-accent); /* Color cyan de consola */
+  color: var(--cyan-accent);
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
   letter-spacing: 2px;
@@ -102,40 +113,40 @@
   line-height: 1.7;
 }
 
-/* --- FRASES (BEEP BOOP) --- */
+/* --- FRASES (BEEP BOOP / BOB ROSS) --- */
 .quote {
   color: var(--secondary);
   text-transform: uppercase;
   letter-spacing: 1px;
   text-align: center;
-  margin-top: 0; /* Mala práctica eliminada: usar márgenes gigantes para suplir posicionamiento */
+  margin: 0;
   animation: float 3s ease-in-out infinite;
-  z-index: 10; /* Asegura que el texto siempre quede por encima del sprite si chocan */
+  z-index: 10;
+  max-width: 320px;
+  line-height: 1.5;
 }
 
 .author {
   display: block;
   font-style: italic;
-  text-transform: none; /* Keep original capitalization (mixed case) to stand out */
+  text-transform: none;
   margin-top: 0.5rem;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   opacity: 0.9;
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  50% { transform: translateY(-6px); }
 }
 
-/* --- ANIMACIÓN DE SPRITES CON SCALE --- */
+/* --- ANIMACIÓN DE SPRITES CON SCALE ADAPTATIVO --- */
 .sprite {
   background-repeat: no-repeat;
-  image-rendering: pixelated; /* Mantiene el pixel art nítido */
+  image-rendering: pixelated;
   display: block;
-  position: absolute;
-  top: 0;
-  transform: scale(5);
-  transform-origin: top center;
+  transform: scale(3.4); /* Escala contenida en móvil: no se sale de la tarjeta */
+  transform-origin: center center;
 }
 
 /* Bob Ross: 164px / 4 frames = 41px */
@@ -162,7 +173,7 @@
   animation: playRobot 0.7s steps(3) infinite;
 }
 
-/* KEYFRAMES (background-position debe ser negativo y llegar al final del ancho) */
+/* KEYFRAMES */
 @keyframes playBob { 
   from { background-position: 0px 0px; } 
   to { background-position: -164px 0px; } 
@@ -185,6 +196,7 @@
     text-align: left;
     gap: 4rem;
     padding: 4rem 5rem;
+    overflow: visible;
   }
 
   .reverse {
@@ -197,7 +209,14 @@
   
   .visualCol {
     flex: 0.5;
+    gap: 1.5rem;
   }
 
+  .spriteWrapper {
+    height: 240px;
+  }
 
+  .sprite {
+    transform: scale(5); /* Escala completa de 5x en pantallas grandes */
+  }
 }

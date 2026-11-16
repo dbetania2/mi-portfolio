@@ -57,10 +57,12 @@ export default function About() {
             className={`${styles.aboutCard} ${item.reverse ? styles.reverse : ''}`}
           >
             <div className={styles.visualCol}>
-              <div 
-                className={`${styles.sprite} ${item.spriteClass}`} 
-                aria-hidden="true" 
-              />
+              <div className={styles.spriteWrapper}>
+                <div 
+                  className={`${styles.sprite} ${item.spriteClass}`} 
+                  aria-hidden="true" 
+                />
+              </div>
               <p className={styles.quote}>
                 {item.quote}
                 {item.author && <span className={styles.author}>{item.author}</span>}

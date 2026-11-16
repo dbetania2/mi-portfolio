@@ -1,0 +1,184 @@
+.galleryContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+/* ── MARCO DOBLE RETRO-FUTURISTA (CIAN + MAGENTA + GLOW) ── */
+.mainFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #07040f;
+  border: 2px solid #ff1e8a;
+  box-shadow: 
+    0 0 15px rgba(255, 30, 138, 0.35),
+    -3px -3px 0px #00f0ff,
+    3px 3px 0px #ff1e8a;
+  overflow: hidden;
+  cursor: pointer;
+  display: block;
+  padding: 0;
+  outline: none;
+  text-align: inherit;
+}
+
+.mainImage {
+  object-fit: cover;
+  image-rendering: pixelated;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.mainFrame:hover .mainImage {
+  transform: scale(1.02);
+}
+
+/* Efecto Scanlines CRT */
+.scanlinesOverlay {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.25),
+    rgba(0, 0, 0, 0.25) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── BOTÓN FLOTANTE [ CLICK PARA AMPLIAR ] ── */
+.expandBadge {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  background: rgba(8, 5, 17, 0.85);
+  backdrop-filter: blur(4px);
+  color: #00f0ff;
+  border: 1px solid #00f0ff;
+  font-family: var(--font);
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  padding: 0.3rem 0.6rem;
+  z-index: 3;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.mainFrame:hover .expandBadge {
+  background: #00f0ff;
+  color: #080511;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.7);
+}
+
+/* ── TIRA DE 4 MINIATURAS HORIZONTAL ── */
+.thumbnailsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.thumbBtn {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #080511;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0.65;
+}
+
+.thumbBtn:hover {
+  opacity: 0.95;
+  border-color: #00f0ff;
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+}
+
+.thumbActive {
+  opacity: 1;
+  border-color: #ff1e8a !important;
+  box-shadow: 0 0 12px rgba(255, 30, 138, 0.6) !important;
+  transform: translateY(-2px);
+}
+
+.thumbImg {
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+/* ── MODAL LIGHTBOX FULLSCREEN ── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(8, 5, 17, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  cursor: zoom-out;
+  padding: 1.5rem;
+  backdrop-filter: blur(5px);
+}
+
+.closeBtn {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: #080511;
+  color: var(--accent);
+  border: 2px solid var(--secondary);
+  box-shadow: 2px 2px 0px var(--secondary);
+  font-family: var(--font);
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  z-index: 100000;
+  text-transform: uppercase;
+  min-height: 44px;
+  min-width: 44px;
+  transition: all 0.2s;
+}
+
+.closeBtn:hover {
+  background: var(--secondary);
+  color: #fff;
+  box-shadow: 0 0 10px var(--secondary);
+}
+
+.lightbox {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  height: 80vh;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: zoom-in;
+}
+
+.lightbox.zoomed {
+  max-width: none;
+  width: 150vw;
+  height: 150vh;
+  cursor: zoom-out;
+  margin: auto;
+}
+
+.lightboxImg {
+  object-fit: contain !important;
+  image-rendering: pixelated;
+}
+
+@media (max-width: 600px) {
+  .thumbnailsGrid {
+    gap: 0.5rem;
+  }
+}
+

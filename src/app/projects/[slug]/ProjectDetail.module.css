@@ -1,17 +1,18 @@
-/* ── Estructura Principal ───────────────────────────── */
+/* ── ESTRUCTURA PRINCIPAL ── */
 .main {
   padding-top: 6rem;
-  padding-bottom: 4rem;
+  padding-bottom: 5rem;
   min-height: 100vh;
 }
 
-/* ── Navegación (Volver Atrás) ─────────────────────── */
+/* ── NAVEGACIÓN (VOLVER ATRÁS) ── */
 .back {
   display: inline-block;
   color: var(--secondary);
   margin-bottom: 2rem;
   text-decoration: none;
   font-family: var(--font);
+  font-size: 1.15rem;
   transition: color 0.2s, transform 0.2s;
   cursor: pointer;
 }
@@ -21,148 +22,194 @@
   transform: translateX(-5px);
 }
 
-/* ── Encabezado ──────────────────────────────────── */
-.title {
-  color: var(--accent);
-  margin-bottom: 0.5rem;
-  font-size: 2.5rem;
-  line-height: 1.2;
+/* ── GRILLA DE 2 COLUMNAS (DESKTOP 7 + 5) ── */
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2rem;
+  align-items: start;
 }
 
-.shortDescription {
-  color: var(--secondary);
-  font-size: 1.2rem;
-  margin-bottom: 2.5rem;
-  line-height: 1.6;
+.leftColumn {
+  grid-column: span 7;
+  width: 100%;
 }
 
-/* ── Layout Contenido (Cuerpo) ────────────────────── */
-.body {
+.rightColumn {
+  grid-column: span 5;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
-  margin-top: 2rem;
+  gap: 1.25rem;
+  width: 100%;
 }
 
-@media (min-width: 768px) {
-  .body {
-    flex-direction: row;
-    align-items: flex-start;
-  }
+/* ── BLOQUE 1: ENCABEZADO ── */
+.headerBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-/* Columna de Descripción */
-.description {
-  flex: 2;
+.title {
+  color: #ff1e8a;
+  text-transform: uppercase;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1.1;
+  text-shadow: 0 0 10px rgba(255, 30, 138, 0.4);
+  word-break: keep-all;
 }
 
-.sectionTitle {
-  color: var(--secondary);
-  font-size: 1.4rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 2px solid var(--primary);
-  padding-bottom: 0.5rem;
+.categoryBadge {
+  align-self: flex-start;
+  background: rgba(113, 24, 60, 0.35);
+  color: var(--cyan-accent);
+  border: 1px solid var(--cyan-accent);
+  box-shadow: 0 0 6px var(--cyan-shadow);
+  padding: 0.2rem 0.6rem;
+  font-family: var(--font);
+  font-size: 0.95rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
 
-/* ── Estilo de Párrafos (Sin Sangría) ─────────────── */
+/* ── BLOQUE 2: DESCRIPCIÓN ── */
+.descriptionBox {
+  background: rgba(11, 7, 26, 0.6);
+  border: 1px solid rgba(211, 26, 100, 0.3);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sectionHeading {
+  color: #ff1e8a;
+  font-size: 1.35rem;
+  letter-spacing: 1px;
+  border-bottom: 1px dashed rgba(211, 26, 100, 0.3);
+  padding-bottom: 0.4rem;
+  margin: 0;
+}
+
 .paragraph {
   font-size: 1.15rem;
-  line-height: 1.9;
+  line-height: 1.8;
   color: var(--accent);
-  margin-bottom: 2rem !important; /* Espacio entre párrafos */
-  text-align: left;              /* Alineación limpia a la izquierda */
-  text-indent: 0;                /* Sangría eliminada */
-  display: block;
-  transition: color 0.3s ease;
+  margin: 0;
 }
 
-.paragraph:hover {
-  color: #fff;
-}
-
-.paragraph:last-child {
-  margin-bottom: 0 !important;
-}
-
-/* ── Sidebar (Barra Lateral) ───────────────────────── */
-.sidebar {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-  background: rgba(255, 255, 255, 0.02);
+/* ── BLOQUE 3: TECNOLOGÍAS Y ACCIONES ── */
+.techAndActionsBox {
+  background: rgba(11, 7, 26, 0.6);
+  border: 1px solid rgba(211, 26, 100, 0.3);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
   padding: 1.5rem;
-  border: 2px solid var(--primary);
-}
-
-.sideBlock {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
-.badges {
+.techGrid {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.8rem;
+  gap: 0.75rem;
+  align-items: center;
 }
 
-.buttons {
-  display: flex;
-  flex-direction: column;
+/* ── BOTONES AL PIE DE LA CAJA (FILA GRID-COLS-2 GAP-4) ── */
+.actionsRow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
 }
 
-/* ── Media Queries Responsive ────────────────────── */
+.singleAction {
+  grid-template-columns: 1fr;
+}
+
+/* Botón Primario: VISITAR SITIO */
+.btnPrimary {
+  background: #ff1e8a;
+  color: #080511;
+  border: 3px solid #ff1e8a;
+  box-shadow: 3px 3px 0px #00f0ff;
+  font-family: var(--font);
+  font-size: 1.15rem;
+  font-weight: bold;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnPrimary:hover {
+  background: #ff3399;
+  color: #000;
+  box-shadow: 1px 1px 0px #00f0ff, 0 0 12px rgba(255, 30, 138, 0.6);
+  transform: translate(2px, 2px);
+}
+
+/* Botón Secundario: GITHUB */
+.btnSecondary {
+  background: rgba(8, 5, 17, 0.7);
+  color: var(--accent);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+  font-family: var(--font);
+  font-size: 1.15rem;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnSecondary:hover {
+  border-color: #00f0ff;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.35);
+  background: rgba(0, 240, 255, 0.08);
+}
+
+/* ── RESPONSIVE (MOBILE & TABLET) ── */
 @media (max-width: 1024px) {
-  .title {
-    font-size: 2rem;
+  .leftColumn {
+    grid-column: span 12;
+  }
+
+  .rightColumn {
+    grid-column: span 12;
+  }
+
+  .gridContainer {
+    gap: 2rem;
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 600px) {
   .main {
     padding-top: 5rem;
   }
 
-  .title {
-    font-size: 1.6rem;
-    margin-bottom: 0.5rem;
+  .actionsRow {
+    grid-template-columns: 1fr;
   }
 
-  .shortDescription {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .body {
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .paragraph {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    text-indent: 0;
-    margin-bottom: 1.5rem !important;
-  }
-
-  .sidebar {
-    padding: 1.25rem;
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  .buttons {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-  
-  .buttons a, 
-  .buttons :global(.pixel-btn) { /* Usamos :global si la clase viene de fuera */
-    flex: 1;
-    text-align: center;
-    min-width: 120px;
-    font-size: 1rem;
-    padding: 0.6rem;
+  .descriptionBox,
+  .techAndActionsBox {
+    padding: 1.25rem 1rem;
   }
 }

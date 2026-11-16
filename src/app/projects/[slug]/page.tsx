@@ -1,7 +1,7 @@
 import { supabase } from '@/lib/supabase'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import ImageLightbox from '@/components/ImageLightbox/ImageLightbox'
+import ProjectGallery from '@/components/ProjectGallery/ProjectGallery'
 import TechIcon from '@/components/TechIcon/TechIcon'
 import styles from './ProjectDetail.module.css'
 
@@ -24,6 +24,16 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
     .map((p: string) => p.trim())
     .filter(Boolean)
 
+  const galleryImages: string[] = Array.isArray(project.images) && project.images.length > 0
+    ? project.images
+    : Array.isArray(project.gallery) && project.gallery.length > 0
+    ? project.gallery
+    : project.image_url
+    ? [project.image_url]
+    : []
+
+  const hasBothActions = Boolean(project.live_url && project.github_url)
+
   return (
     <main className={styles.main}>
       <div className="container">
@@ -31,54 +41,75 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           &lt; Volver a proyectos
         </Link>
 
-        <h1 className={styles.title}>{project.title}</h1>
-        <p className={styles.shortDescription}>{project.short_description}</p>
+        {/* ── ESTRUCTURA DEL LAYOUT (2 COLUMNAS: 7 + 5) ── */}
+        <div className={styles.gridContainer}>
 
-        {project.image_url && (
-          <ImageLightbox src={project.image_url} alt={project.title} priority={true} />
-        )}
+          {/* ── 1. COLUMNA IZQUIERDA (GALERÍA VISUAL) ── */}
+          <div className={styles.leftColumn}>
+            <ProjectGallery images={galleryImages} title={project.title} />
+          </div>
 
-        <div className={styles.body}>
-          <article className={styles.description}>
-            <h2 className={styles.sectionTitle}>&gt; Descripción</h2>
-            {paragraphs.map((paragraph: string, index: number) => (
-              <p 
-                key={`${slug}-paragraph-${index}-${paragraph.slice(0, 15)}`} 
-                className={styles.paragraph}
-              >
-                {paragraph}
-              </p>
-            ))}
-          </article>
+          {/* ── 2. COLUMNA DERECHA (INFORMACIÓN DEL PROYECTO) ── */}
+          <div className={styles.rightColumn}>
 
-          <aside className={styles.sidebar}>
-            <div className={styles.sideBlock}>
-              <h3 className={styles.sectionTitle}>&gt; Tecnologías</h3>
-              <div className={styles.badges}>
+            {/* BLOQUE 1 — ENCABEZADO */}
+            <div className={styles.headerBlock}>
+              <h1 className={styles.title}>{project.title}</h1>
+              <span className={styles.categoryBadge}>
+                [ {project.category?.toUpperCase() || 'PROYECTO'} ]
+              </span>
+            </div>
+
+            {/* BLOQUE 2 — DESCRIPCIÓN */}
+            <article className={styles.descriptionBox}>
+              <h2 className={styles.sectionHeading}>&gt; Descripción</h2>
+              {paragraphs.map((paragraph: string, index: number) => (
+                <p 
+                  key={`${slug}-p-${index}-${paragraph.slice(0, 15)}`} 
+                  className={styles.paragraph}
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </article>
+
+            {/* BLOQUE 3 — TECNOLOGÍAS Y ACCIONES */}
+            <section className={styles.techAndActionsBox}>
+              <h3 className={styles.sectionHeading}>&gt; Tecnologías</h3>
+              <div className={styles.techGrid}>
                 {project.tech_stack?.map((t: string) => (
                   <TechIcon key={t} name={t} size="medium" />
                 ))}
               </div>
-            </div>
 
-            <div className={styles.sideBlock}>
-              <h3 className={styles.sectionTitle}>&gt; Categoría</h3>
-              <span className="pixel-badge">{project.category}</span>
-            </div>
+              {(project.live_url || project.github_url) && (
+                <div className={`${styles.actionsRow} ${!hasBothActions ? styles.singleAction : ''}`}>
+                  {project.live_url && (
+                    <a
+                      href={project.live_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.btnPrimary}
+                    >
+                      VISITAR SITIO
+                    </a>
+                  )}
+                  {project.github_url && (
+                    <a
+                      href={project.github_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.btnSecondary}
+                    >
+                      GITHUB
+                    </a>
+                  )}
+                </div>
+              )}
+            </section>
 
-            <div className={styles.buttons}>
-              {project.github_url && (
-                <a href={project.github_url} target="_blank" rel="noopener noreferrer" className="pixel-btn">
-                  GitHub
-                </a>
-              )}
-              {project.live_url && (
-                <a href={project.live_url} target="_blank" rel="noopener noreferrer" className="pixel-btn">
-                  Live
-                </a>
-              )}
-            </div>
-          </aside>
+          </div>
+
         </div>
       </div>
     </main>
