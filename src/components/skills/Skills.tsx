@@ -20,7 +20,7 @@ export default async function Skills() {
   const skills = Object.entries(counts).sort((a, b) => b[1] - a[1])
 
   const grouped = categoryOrder.reduce((acc, cat) => {
-    acc[cat] = skills.filter(([name]) => techCategories[name] === cat)
+    acc[cat] = skills.filter(([name]) => (techCategories[name] || 'Tools') === cat)
     return acc
   }, {} as Record<string, [string, number][]>)
 

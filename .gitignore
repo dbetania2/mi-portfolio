@@ -42,5 +42,9 @@ next-env.d.ts
 # Seccion mi historia
 /src/app/mystory
 
+# Banner local para capturas
+/src/app/banner
+/public/banner.html
+
 # Documentación y notas
 docs/
