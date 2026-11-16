@@ -41,7 +41,15 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           &lt; Volver a proyectos
         </Link>
 
-        {/* ── ESTRUCTURA DEL LAYOUT (2 COLUMNAS: 7 + 5) ── */}
+        {/* ── ENCABEZADO MÓVIL: Título y categoría al inicio en pantallas chicas ── */}
+        <div className={styles.mobileHeaderBlock}>
+          <h1 className={styles.title}>{project.title}</h1>
+          <span className={styles.categoryBadge}>
+            [ {project.category?.toUpperCase() || 'PROYECTO'} ]
+          </span>
+        </div>
+
+        {/* ── ESTRUCTURA DEL LAYOUT (2 COLUMNAS EN DESKTOP: 7 + 5) ── */}
         <div className={styles.gridContainer}>
 
           {/* ── 1. COLUMNA IZQUIERDA (GALERÍA VISUAL) ── */}
@@ -52,8 +60,8 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           {/* ── 2. COLUMNA DERECHA (INFORMACIÓN DEL PROYECTO) ── */}
           <div className={styles.rightColumn}>
 
-            {/* BLOQUE 1 — ENCABEZADO */}
-            <div className={styles.headerBlock}>
+            {/* ENCABEZADO DESKTOP: Visible únicamente en pantallas grandes ── */}
+            <div className={styles.desktopHeaderBlock}>
               <h1 className={styles.title}>{project.title}</h1>
               <span className={styles.categoryBadge}>
                 [ {project.category?.toUpperCase() || 'PROYECTO'} ]

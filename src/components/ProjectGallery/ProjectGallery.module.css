@@ -176,9 +176,45 @@
   image-rendering: pixelated;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .mainFrame {
+    box-shadow: 
+      0 0 10px rgba(255, 30, 138, 0.35),
+      -2px -2px 0px #00f0ff,
+      2px 2px 0px #ff1e8a;
+  }
+
+  .expandBadge {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.5rem;
+    bottom: 0.5rem;
+    right: 0.5rem;
+  }
+
   .thumbnailsGrid {
     gap: 0.5rem;
+  }
+
+  .overlay {
+    padding: 1rem;
+  }
+
+  .lightbox {
+    height: 70vh;
+  }
+
+  .closeBtn {
+    top: 1rem;
+    right: 1rem;
+    font-size: 1rem;
+    padding: 0.4rem 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .expandBadge {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.4rem;
   }
 }
 
