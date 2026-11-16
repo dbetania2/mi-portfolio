@@ -1,5 +1,6 @@
 import { supabase } from '@/lib/supabase'
 import { notFound } from 'next/navigation'
+import { cookies } from 'next/headers'
 import Link from 'next/link'
 import ProjectGallery from '@/components/ProjectGallery/ProjectGallery'
 import TechIcon from '@/components/TechIcon/TechIcon'
@@ -19,6 +20,13 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   const project = await getProject(slug)
 
   if (!project) notFound()
+
+  // Si el proyecto es un borrador (no publicado), solo permitir visualizar si es admin
+  if (project.is_published === false) {
+    const cookieStore = await cookies()
+    const isAdmin = cookieStore.get('admin_session')?.value === 'authenticated'
+    if (!isAdmin) notFound()
+  }
 
   const paragraphs = (project.description?.split(/\r?\n/) || [])
     .map((p: string) => p.trim())

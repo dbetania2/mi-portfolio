@@ -19,6 +19,7 @@ async function getAllProjects(): Promise<Project[]> {
   const { data } = await supabase
     .from('projects')
     .select('id, title, short_description, tech_stack, github_url, live_url, image_url, category, slug')
+    .eq('is_published', true)
     .order('order_index', { ascending: true })
 
   return data ?? []

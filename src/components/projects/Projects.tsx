@@ -8,6 +8,7 @@ async function getFeaturedProjects() {
     .from('projects')
     .select('id, title, short_description, tech_stack, github_url, live_url, image_url, category, slug')
     .eq('featured', true)
+    .eq('is_published', true)
     .order('order_index', { ascending: true })
 
   return data ?? []
